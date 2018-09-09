@@ -1,35 +1,37 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
+    "noImplicitAny": false,
+    "pretty": true,
+    "stripInternal": true,
+    "importHelpers": true,
+    "noEmitHelpers": true,
     "module": "es2015",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noStrictGenericChecks": true,
+    "noUnusedLocals": true,
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"
     ],
+    "types": ["jest", "node", "webpack", "webpack-env"],
     "lib": [
       "es2017",
       "dom"
-    ],
-    "paths": {
-      "dev-tools": [
-        "dist/dev-tools"
-      ],
-      "dev-tools/*": [
-        "dist/dev-tools/*"
-      ],
-      "my-lib": [
-        "dist/my-lib"
-      ],
-      "my-lib/*": [
-        "dist/my-lib/*"
-      ]
-    }
-  }
+    ]
+  },
+  "exclude": [
+    "**/*.spec.ts",
+    "node_modules",
+    "dist"
+  ],
+  "include": ["**/*.ts"],
 }
