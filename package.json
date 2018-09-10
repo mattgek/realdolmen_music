@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "lint": "npm run lint:ts && npm run lint:html && npm run lint:scss",
+    "lint:fix": "npm run lint:ts -- --fix && npm run lint:scss -- --fix",
     "lint:html": "htmlhint --config .htmlhintrc ./src/**/*.{htm,html}",
     "lint:ts": "tslint -p tsconfig.json -t verbose",
     "lint:scss": "stylelint src/**/*.scss",
