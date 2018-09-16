@@ -37,3 +37,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+src/app/components/menu/index.ts
+src/app/components/menu/menu.component.html
+src/app/components/menu/menu.component.scss
+src/app/components/menu/menu.component.spec.ts
+src/app/components/menu/menu.component.ts
+src/app/components/menu/menu.module.ts
