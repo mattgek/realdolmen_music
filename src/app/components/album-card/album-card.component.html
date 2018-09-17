@@ -1,3 +1,17 @@
-<div>
-  album-card works!
+<div class="album-card-container">
+  <div class="album-cover">
+    <a href="#"
+       class="album-cover-link">
+      <img src="{{albumCoverUrl}}"
+           alt="album-cover-image" />
+    </a>
+  </div>
+  <div class="album-simple-detail">
+    <div class="primary-label">
+      <span>{{albumTitle}}</span>
+    </div>
+    <div class="secondary-label">
+      <span>{{albumType}} • {{additionalInfo}}</span>
+    </div>
+  </div>
 </div>
