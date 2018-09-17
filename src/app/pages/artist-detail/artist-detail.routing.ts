@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LibraryComponent } from './library.component';
+import { ArtistDetailComponent } from './artist-detail.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LibraryComponent
+    component: ArtistDetailComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class LibraryRoutingModule {}
+export class ArtistDetailRoutingModule {}

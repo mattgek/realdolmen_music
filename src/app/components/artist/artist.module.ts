@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ArtistComponent } from './artist.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [ArtistComponent],
   imports: [CommonModule],
-  exports: [],
-  providers: []
+  exports: [ArtistComponent]
 })
-export class ArtistsModule {}
+export class ArtistModule {}
