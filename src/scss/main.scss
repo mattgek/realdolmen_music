@@ -1,0 +1,15 @@
+﻿// based on the 7–1 pattern: https://sass-guidelin.es/#the-7-1-pattern
+
+@import 'variables/_index';
+
+// Utility/helper styles
+@import 'utils/_index';
+
+// Vendor styles
+@import 'vendor/_index';
+
+// Base styles (general styles & typography)
+@import 'base/_index';
+
+// Patterns
+@import 'patterns/_index';
