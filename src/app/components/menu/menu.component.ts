@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -7,5 +7,18 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
-  faSearchIcon = faSearch;
+  public faSearchIcon = faSearch;
+  public hasScrolled = false;
+
+  @HostListener('window:scroll', ['$event'])
+  public onWindowScroll($event) {
+    this.hasScrolled = this.getScrollPosition() > 25;
+  }
+
+  private getScrollPosition(): number {
+    return (
+      window.pageYOffset ||
+      ((document.documentElement || document.body.parentNode || document.body) as any).scrollTop
+    );
+  }
 }
