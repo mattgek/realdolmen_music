@@ -1,0 +1,27 @@
+// sass-lint: brace-style
+/// Function used to convert a pixel value into an em value (based on a context)
+///
+/// @param {Number} $h-hsb - The hue value
+/// @param {Number} $s-hsb - The saturation value
+/// @param {Number} $b-hsb - The brightness value
+/// @param {Number} $a [1] - The alpha value (0 - 1)
+@function em($pixels, $context: $font-size-base) {
+  @return ($pixels / $context) + 0;
+}
+
+/// Function for getting a hsla representation of a hsb/hsv colour value
+///
+/// @param {Number} $h-hsb - The hue value
+/// @param {Number} $s-hsb - The saturation value
+/// @param {Number} $b-hsb - The brightness value
+/// @param {Number} $a [1] - The alpha value (0 - 1)
+
+@function hsb($h-hsb, $s-hsb, $b-hsb, $a: 1) {
+  @if $b-hsb == 0 {
+    @return hsla(0, 0, 0, $a);
+  } @else {
+    $l-hsl: ($b-hsb / 2) * (2 - ($s-hsb / 100));
+    $s-hsl: ($b-hsb * $s-hsb) / if($l-hsl < 50, $l-hsl * 2, 200 - $l-hsl * 2);
+    @return hsla($h-hsb, $s-hsl, $l-hsl, $a);
+  }
+}
