@@ -1,0 +1,58 @@
+.carousel-container {
+  display: flex;
+  margin: 64px 95px;
+
+  .list-container {
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding: 0;
+
+    .carousel-item-list {
+      display: flex;
+    }
+  }
+
+
+
+  .carousel-action-container {
+    z-index: 9999;
+    height: 220px;
+    position: relative;
+    margin-top: 16px;
+    margin-bottom: 16px;
+
+    &.right {
+      width: 110px;
+    }
+
+    .round-icon {
+      box-shadow: rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px, rgba(0, 0, 0, 0.4) 0px 2px 4px -1px;
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 22px;
+      margin-top: 50%;
+      bottom: 50%;
+      transform: translate(-50%, 50%);
+      cursor: pointer;
+      outline: unset;
+      border-style: unset;
+
+
+
+      fa-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+      }
+
+    }
+  }
+
+
+}

@@ -7,5 +7,5 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
-  faSearchIcon = faSearch;
+  public faSearchIcon = faSearch;
 }

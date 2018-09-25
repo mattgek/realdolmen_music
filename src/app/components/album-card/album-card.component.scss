@@ -2,10 +2,11 @@
 
 $album-card-height: 220px;
 $album-card-max-width: 400px;
+$album-card-min-width: 220px;
 
 // TODO
 .album-card-container {
-  height: $album-card-height;
+  min-width: $album-card-min-width;
   max-width: $album-card-max-width;
   margin-right: 24px;
 
@@ -15,7 +16,6 @@ $album-card-max-width: 400px;
     .album-cover-link {
       img {
         height: 100%;
-        width: 100%;
         object-fit: cover;
       }
     }
