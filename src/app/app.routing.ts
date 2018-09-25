@@ -10,6 +10,14 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: './pages/home/home.module#HomeModule'
+  },
+  {
+    path: 'hotlist',
+    loadChildren: './pages/hotlist/hotlist.module#HotlistModule'
+  },
+  {
+    path: 'library',
+    loadChildren: './pages/library/library.module#LibraryModule'
   }
 ];
 
