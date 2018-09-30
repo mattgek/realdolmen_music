@@ -1,0 +1,11 @@
+﻿@import '../variables/_index';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: $background-general;
+  font-family: $font-family;
+}

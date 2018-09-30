@@ -1,7 +1,26 @@
-.menu-container {
+.topbar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 1;
+}
+
+.topbar-background {
+  background-color: #232323;
+  opacity: 0;
+  transition: opacity 0.2s;
+  will-change: opacity;
+
+  &.scrolled {
+    opacity: 1;
+  }
+}
+
+.topbar {
   display: flex;
-  min-height: 64px;
-  max-height: 80px;
+  height: 64px;
   background-color: rgba(0, 0, 0, 0);
 
   .logo {
@@ -37,10 +56,10 @@
 
         .menu-item-link {
           color: rgba(255, 255, 255, 0.5);
-          font-size: 19px;
-          font-weight: 350;
+          font-size: 20px;
+          font-weight: 500;
           text-decoration: none;
-          font-family: Roboto;
+          font-family: Roboto-Regular;
 
           &:hover {
             color: rgba(255, 255, 255, 1);
@@ -60,8 +79,6 @@
         }
       }
     }
-
-
   }
 
   .login-user-container {

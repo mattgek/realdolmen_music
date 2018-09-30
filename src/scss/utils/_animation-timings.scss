@@ -1,0 +1,14 @@
+///
+/// ANIMATION-TIMINGS
+///
+
+/// Animation timing base
+$animation-timing-bpm: 60;
+
+/// Calculate animation timings
+$whole-note: 60s / $animation-timing-bpm;
+$half-note: $whole-note / 2;
+$third-note: $whole-note / 3;
+$quarter-note: $whole-note / 4;
+$eight-note: $whole-note / 8;
+$sixteenth-note: $whole-note / 16;
