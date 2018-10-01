@@ -16,14 +16,14 @@
   ],
   "globals": {
     "ts-jest": {
-      "tsConfigFile": "../tsconfig/tsconfig-test.json",
+      "tsConfigFile": "./tsconfig/tsconfig-test.json",
       "enableTsDiagnostics": false
     },
     "__TRANSFORM_HTML__": true
   },
   "collectCoverage": true,
   "coverageDirectory": "<rootDir>/reports/coverage",
-  "rootDir": "../../../..",
+  "rootDir": "../",
   "roots": ["<rootDir>/src/"],
   "cacheDirectory": "<rootDir>/tmp/jest",
   "transformIgnorePatterns": ["node_modules/"]

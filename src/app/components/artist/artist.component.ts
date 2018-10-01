@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-artist',
   templateUrl: './artist.component.html',
   styleUrls: ['./artist.component.scss']
 })
-export class ArtistComponent implements OnInit {
+export class ArtistComponent {
+  @Input()
+  public artistUrl: string;
 
-  constructor() { }
+  @Input()
+  public artistName: string;
 
-  ngOnInit() {
-  }
-
+  @Input()
+  public followers: number;
 }
