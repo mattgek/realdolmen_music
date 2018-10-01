@@ -6,7 +6,6 @@ $height-img: 350px;
   right: 0;
   bottom: 1px;
   left: 0;
-  z-index: -1;
 
   img {
     height: $height-img;
@@ -25,4 +24,8 @@ $height-img: 350px;
     top: 0;
     bottom: 0;
   }
+}
+
+.content {
+  position: relative;
 }
