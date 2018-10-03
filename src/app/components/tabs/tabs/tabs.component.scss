@@ -1,5 +1,13 @@
 .tab-headers {
-  background-color: #232323;
+  border-bottom: 1px solid rgba(31, 162, 83, 0.2);
+
+  &.scrolled {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background-color: #232323;
+  }
 }
 
 .tab-labels {
@@ -18,10 +26,10 @@
 
   &.active {
     color: rgba(255, 255, 255, 1);
+    border-bottom: 2px solid rgb(31, 162, 83);
   }
 
-  &.active,
   &:hover {
-    border-bottom: 2px solid green;
+    color: rgba(255, 255, 255, 1);
   }
 }

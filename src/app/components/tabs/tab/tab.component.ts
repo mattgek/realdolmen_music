@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input } from '@angular/core';
+import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-tab',
@@ -9,6 +9,7 @@ export class TabComponent {
   @Input()
   public label: string;
 
-  @ContentChild('content', { read: true })
-  public content: any;
+  /** Template inside the MatTab view that contains an `<ng-content>`. */
+  @ViewChild(TemplateRef)
+  public content: TemplateRef<any>;
 }

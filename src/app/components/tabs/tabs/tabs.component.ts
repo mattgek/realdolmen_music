@@ -1,4 +1,4 @@
-import { Component, ContentChildren, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, QueryList } from '@angular/core';
 import { TabComponent } from '../tab';
 
 @Component({
@@ -6,18 +6,17 @@ import { TabComponent } from '../tab';
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss']
 })
-export class TabsComponent {
+export class TabsComponent implements AfterContentInit {
   @ContentChildren(TabComponent)
   public tabs: QueryList<TabComponent>;
 
   public activeTab: TabComponent;
 
-  public ngAfterContentChecked() {
+  public ngAfterContentInit() {
     this.activeTab = this.tabs.toArray()[0];
   }
 
   public setActiveTab(activeTab: TabComponent) {
-    debugger;
     this.activeTab = activeTab;
   }
 }

@@ -1,18 +1,20 @@
 <div class="app-tabs">
-  <div class="tabs-header">
+  <div class="tab-headers"
+       appScrollClass="64">
     <div class="tab-labels">
       <div *ngFor="let tab of tabs"
            class="tab-label"
-           [class.active]="tab.label === activeTab?.label"
+           [ngClass]="{active: tab.label===activeTab?.label}"
            (click)="setActiveTab(tab)">
         {{tab.label}}
       </div>
     </div>
   </div>
+
   <div class="tab-content">
     <div *ngIf="activeTab"
          class="tab-content">
       <ng-container *ngTemplateOutlet="activeTab.content"></ng-container>
     </div>
   </div>
-</div>>
+</div>
