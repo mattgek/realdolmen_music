@@ -1,0 +1,102 @@
+{
+  "playlist": [
+    {
+      "id": 1,
+      "name": "punk hotlist",
+      "img": "assets/images/playlist/1.jpg",
+      "creator": "R Music",
+      "group": "Today's hits"
+    },
+    {
+      "id": 2,
+      "name": "Top Hits Vlaanderen",
+      "img": "assets/images/playlist/2.jpg",
+      "creator": "R Music",
+      "group": "Today's hits"
+    },
+    {
+      "id": 3,
+      "name": "Hits remixed",
+      "img": "assets/images/playlist/3.jpg",
+      "creator": "R Music",
+      "group": "Today's hits"
+    },
+    {
+      "id": 4,
+      "name": "Pop Hotlist",
+      "img": "assets/images/playlist/4.jpg",
+      "creator": "R Music",
+      "group": "Today's hits"
+    },
+    {
+      "id": 5,
+      "name": "Rock hotlist",
+      "img": "assets/images/playlist/5.jpg",
+      "creator": "R Music",
+      "group": "Today's hits"
+    },
+    {
+      "id": 6,
+      "name": "Top Hits Wallonie",
+      "img": "assets/images/playlist/6.jpg",
+      "creator": "R Music",
+      "group": "Today's hits"
+    },
+    {
+      "id": 7,
+      "name": "Dance & EDM Hotlist",
+      "img": "assets/images/playlist/7.jpg",
+      "creator": "R Music",
+      "group": "Today's hits"
+    },
+    {
+      "id": 8,
+      "name": "Urban Hotlist",
+      "img": "assets/images/playlist/8.jpg",
+      "creator": "R Music",
+      "group": "Today's hits"
+    },
+    {
+      "id": 9,
+      "name": "Alternative & Indie Hotlist",
+      "img": "assets/images/playlist/9.jpg",
+      "creator": "R Music",
+      "group": "Today's hits"
+    },
+    {
+      "id": 10,
+      "name": "Hip Hop Hotlist",
+      "img": "assets/images/playlist/10.jpg",
+      "creator": "R Music",
+      "group": "Today's hits"
+    },
+    {
+      "id": 11,
+      "name": "Fancy hotlist",
+      "img": "assets/images/playlist/11.png",
+      "creator": "Dummy",
+      "group": "Instant energy"
+    },
+    {
+      "id": 12,
+      "name": "Old classics",
+      "img": "assets/images/playlist/12.jpg",
+      "creator": "Test",
+      "group": "Cool vibes"
+    },
+    {
+      "id": 13,
+      "name": "Together strong",
+      "img": "assets/images/playlist/13.jpg",
+      "creator": "Start 2 Run",
+      "group": "Instant energy"
+    },
+    {
+      "id": 14,
+      "name": "Static",
+      "img": "assets/images/playlist/14.jpg",
+      "creator": "Test",
+      "group": "Instant energy"
+    }
+  ]
+}

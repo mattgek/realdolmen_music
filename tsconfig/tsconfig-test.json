@@ -7,6 +7,6 @@
     "types": ["jest", "node"],
     "allowJs": true
   },
-  "exclude": ["./tmp", "./dist"],
-  "include": ["./src/**/*.spec.ts", "./src/**/*.d.ts"]
+  "exclude": ["../node_modules", "../dist"],
+  "include": ["../**/*.spec.ts"]
 }

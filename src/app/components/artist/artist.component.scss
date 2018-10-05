@@ -1,0 +1,31 @@
+@import '../../../scss/variables/_index';
+
+$color-primary: $color-text-primary;
+$color-secondary: $color-text-secondary;
+
+.artist-cover {
+  border-radius: 100px;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+}
+
+.artist-info {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.primary-label {
+  color: $color-primary;
+  font-size: 16px;
+  font-weight: 350;
+  margin-top: 8px;
+}
+
+.secondary-label {
+  color: $color-secondary;
+  font-size: 16px;
+  font-weight: 250;
+  line-height: 20px;
+  margin-top: 4px;
+}

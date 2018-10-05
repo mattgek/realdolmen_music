@@ -1,3 +1,44 @@
-p {
-  color: white;
+@import '../../../scss/variables/_index';
+
+$album-card-height: 190px;
+$album-card-max-width: 190px;
+$color-primary: $color-text-primary;
+$color-secondary: $color-text-secondary;
+
+// TODO
+.album-card-container {
+  height: $album-card-height;
+  max-width: $album-card-max-width;
+  margin-right: 24px;
+
+  .album-cover {
+    height: 100%;
+
+    .album-cover-link {
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .album-simple-detail {
+    margin-top: 8px;
+  }
+
+  .primary-label {
+    color: $color-primary;
+    font-size: 16px;
+    font-weight: 350;
+    margin-top: 8px;
+  }
+
+  .secondary-label {
+    color: $color-secondary;
+    font-size: 16px;
+    font-weight: 250;
+    line-height: 20px;
+    margin-top: 4px;
+  }
 }

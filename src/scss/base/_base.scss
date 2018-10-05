@@ -1,0 +1,20 @@
+﻿@import '../variables/_index';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: $background-general;
+  font-family: $font-family;
+}
+
+a {
+  color: $color-text-primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
