@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 type Orientation = 'prev' | 'next' | 'none';
@@ -90,7 +90,7 @@ export class CarouselComponent implements OnInit {
   public slideAction: Orientation;
   public currentAlbum: number;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  // constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
     this.slideAction = 'none';
@@ -98,46 +98,38 @@ export class CarouselComponent implements OnInit {
   }
 
   public nextItem() {
-    this.showPreviousBtn = true;
-
-    // Change the "state" for our animation trigger.
-    this.slideAction = 'next';
-
-    // Force the Template to apply the new animation state before we actually
-    // change the rendered element view-model. If we don't force a change-detection,
-    // the new [@orientation] state won't be applied prior to the "leave" transition;
-    // which means that we won't be leaving from the "expected" state.
-    this.changeDetectorRef.detectChanges();
-
-    // Find the currently selected index.
-    var index = this.friends.indexOf(this.selectedFriend);
-
-    // Move the rendered element to the next index - this will cause the current item
-    // to enter the ( "next" => "void" ) transition and this new item to enter the
-    // ( "void" => "next" ) transition.
-    this.selectedFriend = this.friends[index + 1] ? this.friends[index + 1] : this.friends[0];
+    // this.showPreviousBtn = true;
+    // // Change the "state" for our animation trigger.
+    // this.slideAction = 'next';
+    // // Force the Template to apply the new animation state before we actually
+    // // change the rendered element view-model. If we don't force a change-detection,
+    // // the new [@orientation] state won't be applied prior to the "leave" transition;
+    // // which means that we won't be leaving from the "expected" state.
+    // this.changeDetectorRef.detectChanges();
+    // // Find the currently selected index.
+    // var index = this.friends.indexOf(this.selectedFriend);
+    // // Move the rendered element to the next index - this will cause the current item
+    // // to enter the ( "next" => "void" ) transition and this new item to enter the
+    // // ( "void" => "next" ) transition.
+    // this.selectedFriend = this.friends[index + 1] ? this.friends[index + 1] : this.friends[0];
   }
 
   public previousItem() {
-    this.slideAction = 'previousItem';
-
-    // Change the "state" for our animation trigger.
-    this.orientation = 'prev';
-
-    // Force the Template to apply the new animation state before we actually
-    // change the rendered element view-model. If we don't force a change-detection,
-    // the new [@orientation] state won't be applied prior to the "leave" transition;
-    // which means that we won't be leaving from the "expected" state.
-    this.changeDetectorRef.detectChanges();
-
-    // Find the currently selected index.
-    var index = this.friends.indexOf(this.selectedFriend);
-
-    // Move the rendered element to the previous index - this will cause the current
-    // item to enter the ( "prev" => "void" ) transition and this new item to enter
-    // the ( "void" => "prev" ) transition.
-    this.selectedFriend = this.friends[index - 1]
-      ? this.friends[index - 1]
-      : this.friends[this.friends.length - 1];
+    // this.slideAction = 'previousItem';
+    // // Change the "state" for our animation trigger.
+    // this.orientation = 'prev';
+    // // Force the Template to apply the new animation state before we actually
+    // // change the rendered element view-model. If we don't force a change-detection,
+    // // the new [@orientation] state won't be applied prior to the "leave" transition;
+    // // which means that we won't be leaving from the "expected" state.
+    // this.changeDetectorRef.detectChanges();
+    // // Find the currently selected index.
+    // var index = this.friends.indexOf(this.selectedFriend);
+    // // Move the rendered element to the previous index - this will cause the current
+    // // item to enter the ( "prev" => "void" ) transition and this new item to enter
+    // // the ( "void" => "prev" ) transition.
+    // this.selectedFriend = this.friends[index - 1]
+    //   ? this.friends[index - 1]
+    //   : this.friends[this.friends.length - 1];
   }
 }
