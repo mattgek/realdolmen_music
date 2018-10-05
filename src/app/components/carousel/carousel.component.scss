@@ -1,6 +1,5 @@
 .carousel-container {
   display: flex;
-  margin: 64px 95px;
 
   .list-container {
     overflow: auto;
@@ -10,6 +9,7 @@
 
     .carousel-item-list {
       display: flex;
+      padding: unset;
     }
   }
 
