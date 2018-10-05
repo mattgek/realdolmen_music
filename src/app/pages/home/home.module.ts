@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { AlbumCardModule, ArtistModule } from '../../components';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home.routing';
+import { HomeService } from './services';
 
 @NgModule({
   declarations: [HomeComponent],
   imports: [CommonModule, HomeRoutingModule, AlbumCardModule, ArtistModule],
-  exports: [HomeComponent]
+  exports: [HomeComponent],
+  providers: [HomeService]
 })
 export class HomeModule {}
