@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { TabsComponent } from './tabs.component';
+import { ScrollClassModule } from '../../directives';
+import { TabComponent } from './tab';
+import { TabsComponent } from './tabs';
+
+const components = [TabsComponent, TabComponent];
 
 @NgModule({
-  declarations: [TabsComponent],
-  imports: [CommonModule],
-  exports: [TabsComponent]
+  declarations: [components],
+  imports: [CommonModule, ScrollClassModule],
+  exports: [components]
 })
 export class TabsModule {}

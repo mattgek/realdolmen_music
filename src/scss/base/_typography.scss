@@ -1,1 +1,13 @@
-﻿// todo: add typography information in here
+﻿* {
+  color: white;
+}
+
+h1 {
+  color: white;
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 36px;
+  max-height: 72px;
+  max-width: 640px;
+  margin: 32px 0 16px 0;
+}

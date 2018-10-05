@@ -2,42 +2,35 @@
   <img src="assets/images/header_bg.jpg" />
   <div class="overlay"></div>
 </div>
+test
+<div class="content">
+  <ng-container *ngFor="let group of playlists">
+    <h1>{{group.group}}</h1>
+    <div style="margin-bottom:56px;">
+      <app-album-card *ngFor="let item of group.items"
+                      [albumCoverUrl]="item.img"
+                      [albumTitle]="item.name"
+                      albumType="Playlist"
+                      [additionalInfo]="item.creator"
+                      style="display:inline-block;"></app-album-card>
+    </div>
+  </ng-container>
+  test {{playlists | json}}
+  <!--
+  <div style="display: flex;">
+    <app-album-card albumCoverUrl="https://via.placeholder.com/220x220"
+                    albumtitle="Hit Collection"
+                    albumType="Album"
+                    additionalInfo="Fancy"></app-album-card>
+    <app-album-card albumCoverUrl="https://via.placeholder.com/400x220"
+                    albumtitle="Chinese Eyes"
+                    albumType="Fancy"
+                    additionalInfo="151K views"></app-album-card>
+    <app-album-card albumCoverUrl="https://via.placeholder.com/220x220"
+                    albumtitle="Locomotion"
+                    albumType="Album"
+                    additionalInfo="Fancy"></app-album-card>
+  </div> -->
 
-<h1>Today's hits</h1>
-<app-carousel></app-carousel>
 
-<h1>Listen again</h1>
-<app-carousel></app-carousel>
-
-<h1>Good times</h1>
-<app-carousel></app-carousel>
-
-<h1>Recommended music video's</h1>
-<app-carousel></app-carousel>
-
-<h1>New releases</h1>
-<app-carousel></app-carousel>
-
-<h1>Cool vibes</h1>
-<app-carousel></app-carousel>
-
-<h1>Instant energy</h1>
-<app-carousel></app-carousel>
-
-<h1>Deep focus</h1>
-<app-carousel></app-carousel>
-
-<h1>Live performances</h1>
-<app-carousel></app-carousel>
-
-<h1>Fresh new music</h1>
-<app-carousel></app-carousel>
-
-<h1>New video's</h1>
-<app-carousel></app-carousel>
-
-<h1>Beast mode</h1>
-<app-carousel></app-carousel>
-
-<h1>Easy evening</h1>
-<app-carousel></app-carousel>
+</div>

@@ -9,3 +9,12 @@ body {
   background-color: $background-general;
   font-family: $font-family;
 }
+
+a {
+  color: $color-text-primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

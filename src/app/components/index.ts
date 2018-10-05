@@ -3,6 +3,7 @@ export * from './artist';
 export * from './carousel';
 export * from './context-menu';
 export * from './loader';
+export * from './menu';
 export * from './overlay';
 export * from './player';
 export * from './search';
