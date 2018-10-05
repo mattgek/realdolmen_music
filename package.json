@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "fake-api":"json-server --watch fake-db/db.json",
+    "fake-api": "json-server --watch fake-db/db.json",
     "lint": "npm run lint:ts && npm run lint:html && npm run lint:scss",
     "lint:fix": "npm run lint:ts -- --fix && npm run lint:scss -- --fix",
     "lint:html": "htmlhint --config .htmlhintrc ./src/**/*.{htm,html}",
