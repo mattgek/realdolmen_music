@@ -1,19 +1,11 @@
 @import '../../../scss/variables/_index';
 
-$album-card-height: 190px;
 $album-card-max-width: 190px;
-$color-primary: $color-text-primary;
-$color-secondary: $color-text-secondary;
 
 // TODO
 .square-card-container {
-  height: $album-card-height;
   max-width: $album-card-max-width;
   margin-right: 24px;
-
-  .square-cover {
-    height: 100%;
-  }
 
   .square-detail {
     margin-top: 8px;

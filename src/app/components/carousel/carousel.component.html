@@ -1,3 +1,56 @@
-<p>
-  scroller works!
-</p>
+<div class="carousel-container">
+  <div class="carousel-action-container"
+       *ngIf="showPreviousBtn">
+    <button class="round-icon">
+      <fa-icon [icon]="carretLeft"></fa-icon>
+    </button>
+  </div>
+  <div class="list-container">
+    <ul class="carousel-item-list">
+      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
+                      albumTitle="Hit Collection"
+                      albumType="Album"
+                      additionalInfo="Fancy"></app-album-card>
+      <app-album-card albumCoverUrl="https://via.placeholder.com/400x226"
+                      albumTitle="Chinese Eyes"
+                      albumType="Fancy"
+                      additionalInfo="151K views"></app-album-card>
+      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
+                      albumTitle="Locomotion"
+                      albumType="Album"
+                      additionalInfo="Fancy"></app-album-card>
+      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
+                      albumTitle="Locomotion 2"
+                      albumType="Album"
+                      additionalInfo="Fancy"></app-album-card>
+      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
+                      albumTitle="Locomotion3"
+                      albumType="Album"
+                      additionalInfo="Fancy"></app-album-card>
+      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
+                      albumTitle="Locomotion4"
+                      albumType="Album"
+                      additionalInfo="Fancy"></app-album-card>
+      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
+                      albumTitle="Locomotion5"
+                      albumType="Album"
+                      additionalInfo="Fancy"></app-album-card>
+      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
+                      albumTitle="Locomotion6"
+                      albumType="Album"
+                      additionalInfo="Fancy"></app-album-card>
+      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
+                      albumTitle="Locomotion7"
+                      albumType="Album"
+                      additionalInfo="Fancy"></app-album-card>
+    </ul>
+  </div>
+
+
+  <div class="carousel-action-container">
+    <button class="round-icon right">
+      <fa-icon [icon]="carretRight"></fa-icon>
+    </button>
+  </div>
+
+</div>

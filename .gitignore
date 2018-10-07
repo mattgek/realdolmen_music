@@ -44,3 +44,5 @@ src/app/components/menu/menu.component.scss
 src/app/components/menu/menu.component.spec.ts
 src/app/components/menu/menu.component.ts
 src/app/components/menu/menu.module.ts
+
+package-lock\.json

@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RoundCardComponent } from './round-card.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [RoundCardComponent],
   imports: [CommonModule],
-  exports: []
+  exports: [RoundCardComponent]
 })
 export class RoundCardModule {}
