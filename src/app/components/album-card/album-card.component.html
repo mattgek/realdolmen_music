@@ -1,17 +1,17 @@
-<div class="album-card-container">
-  <div class="album-cover">
+<app-square-card>
+  <ng-container cover>
     <a href="#"
        class="album-cover-link">
       <img [src]="albumCoverUrl"
            alt="album-cover-image" />
     </a>
-  </div>
-  <div class="album-simple-detail">
+  </ng-container>
+  <ng-container detail>
     <div class="primary-label">
       <span>{{albumTitle}}</span>
     </div>
     <div class="secondary-label">
       <span>{{albumType}} • {{additionalInfo}}</span>
     </div>
-  </div>
-</div>
+  </ng-container>
+</app-square-card>

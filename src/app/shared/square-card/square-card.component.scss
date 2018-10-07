@@ -1,0 +1,13 @@
+@import '../../../scss/variables/_index';
+
+$album-card-max-width: 190px;
+
+// TODO
+.square-card-container {
+  max-width: $album-card-max-width;
+  margin-right: 24px;
+
+  .square-detail {
+    margin-top: 8px;
+  }
+}
