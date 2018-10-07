@@ -6,24 +6,13 @@ $color-primary: $color-text-primary;
 $color-secondary: $color-text-secondary;
 
 // TODO
-.album-card-container {
-  min-width: $album-card-min-width;
-  max-width: $album-card-max-width;
-  margin-right: 24px;
 
-  .album-cover {
+
+.album-cover-link {
+  img {
     height: 100%;
-
-    .album-cover-link {
-      img {
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-  }
-
-  .album-simple-detail {
-    margin-top: 8px;
+    width: 100%;
+    object-fit: cover;
   }
 
   .primary-label {
