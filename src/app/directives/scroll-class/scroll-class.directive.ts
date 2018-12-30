@@ -10,11 +10,11 @@ export class ScrollClassDirective {
   @HostBinding('class.scrolled')
   public hasMeetScrollingTreshold: boolean;
 
+  constructor(private el: ElementRef) {}
+
   @HostListener('window:scroll', ['$event'])
   public onWindowScroll($event) {
     const positioningOnScreen = this.el.nativeElement.parentNode.getBoundingClientRect();
     this.hasMeetScrollingTreshold = positioningOnScreen.top <= this.appScrollClass;
   }
-
-  constructor(private el: ElementRef) {}
 }
