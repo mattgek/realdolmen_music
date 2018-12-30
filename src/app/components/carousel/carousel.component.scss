@@ -13,8 +13,6 @@
     }
   }
 
-
-
   .carousel-action-container {
     z-index: 9999;
     height: 220px;
@@ -27,7 +25,8 @@
     }
 
     .round-icon {
-      box-shadow: rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px, rgba(0, 0, 0, 0.4) 0px 2px 4px -1px;
+      box-shadow: rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 1px 10px 0,
+        rgba(0, 0, 0, 0.4) 0 2px 4px -1px;
       position: absolute;
       background: white;
       border-radius: 50%;
@@ -41,8 +40,6 @@
       outline: unset;
       border-style: unset;
 
-
-
       fa-icon {
         position: absolute;
         top: 50%;
@@ -50,9 +47,6 @@
         margin-right: -50%;
         transform: translate(-50%, -50%);
       }
-
     }
   }
-
-
 }
