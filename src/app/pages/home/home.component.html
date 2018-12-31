@@ -6,13 +6,12 @@ test
 <div class="content">
   <ng-container *ngFor="let group of playlists">
     <h1>{{group.group}}</h1>
+
     <div style="margin-bottom:56px;">
-      <app-album-card *ngFor="let item of group.items"
-                      [albumCoverUrl]="item.img"
-                      [albumTitle]="item.name"
-                      albumType="Playlist"
-                      [additionalInfo]="item.creator"
-                      style="display:inline-block;"></app-album-card>
+      <app-carousel>
+        <app-album-card *ngFor="let item of group.items" [albumCoverUrl]="item.img" [albumTitle]="item.name" albumType="Playlist"
+                        [additionalInfo]="item.creator"></app-album-card>
+      </app-carousel>
     </div>
   </ng-container>
   test {{playlists | json}}

@@ -2,14 +2,24 @@
   display: flex;
 
   .list-container {
-    overflow: auto;
-    overflow-x: hidden;
-    overflow-y: hidden;
     padding: 0;
 
     .carousel-item-list {
       display: flex;
       padding: unset;
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      & > ::ng-deep * {
+        flex: 0 0 auto;
+      }
     }
   }
 
