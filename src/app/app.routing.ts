@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -9,15 +10,15 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: './pages/home/home.module#HomeModule'
+    component: HomeComponent
   },
   {
     path: 'hotlist',
-    loadChildren: './pages/hotlist/hotlist.module#HotlistModule'
+    loadChildren: './hotlist/hotlist.module#HotlistModule'
   },
   {
     path: 'library',
-    loadChildren: './pages/library/library.module#LibraryModule'
+    loadChildren: './library/library.module#LibraryModule'
   }
 ];
 

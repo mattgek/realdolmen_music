@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { SquareCardModule } from '../../shared';
+import { SquareCardModule } from '../square-card';
 import { AlbumCardComponent } from './album-card.component';
 
 @NgModule({

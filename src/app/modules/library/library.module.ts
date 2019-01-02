@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { TabsModule } from '../../components';
+import { TabsModule } from '../tabs';
 import {
   AlbumsComponent,
   ArtistsComponent,

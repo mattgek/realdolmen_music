@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ScrollClassModule } from '../../directives';
+import { ScrollClassModule } from '../scroll-class';
 import { TabComponent } from './tab';
 import { TabsComponent } from './tabs';
 

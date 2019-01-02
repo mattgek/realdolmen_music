@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReadableNumberModule } from '../../pipes';
+import { ReadableNumberModule } from '../readable-number';
 import { ArtistComponent } from './artist.component';
 
 @NgModule({
