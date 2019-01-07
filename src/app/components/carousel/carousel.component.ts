@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -7,12 +7,18 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./carousel.component.scss']
 })
 export class CarouselComponent implements OnInit {
+  @Input()
+  public items: any[];
+
+  @ContentChild('[carousel-tmpl]', { read: TemplateRef })
+  public templateItem: TemplateRef<any>;
+
   public carretLeft = faAngleLeft;
   public carretRight = faAngleRight;
-  public showPreviousBtn: boolean;
-  public currentAlbum: number;
+  public showPreviousBtn: boolean = true;
+  public showNextBtn: boolean = true;
 
   public ngOnInit(): void {
-    this.currentAlbum = 0;
+    // todo
   }
 }

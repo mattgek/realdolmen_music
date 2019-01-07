@@ -6,12 +6,17 @@
   </div>
   <div class="list-container">
     <ul class="carousel-item-list">
-      <ng-content></ng-content>
+      <!-- <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+        <div *cdkVirtualFor="let item of items" class="example-item">{{item}}</div>
+      </cdk-virtual-scroll-viewport> -->
+      <ng-container *ngFor="let item of items">
+        <ng-container *ngTemplateOutlet="templateItem; context: {ctx:item}"></ng-container>
+      </ng-container>
     </ul>
   </div>
 
 
-  <div class="carousel-action-container">
+  <div class="carousel-action-container" *ngIf="showNextBtn">
     <button class="round-icon right">
       <fa-icon [icon]="carretRight"></fa-icon>
     </button>
