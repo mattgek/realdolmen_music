@@ -7,11 +7,13 @@
     <h1>{{group.group}}</h1>
 
     <div style="margin-bottom:56px;">
-      <app-carousel [items]="group.items">
-        <ng-template carousel-tmpl let-item="ctx.item">
-          <app-album-card [albumCoverUrl]="item.img" [albumTitle]="item.name" albumType="Playlist" [additionalInfo]="item.creator"></app-album-card>
-        </ng-template>
+      <app-carousel [items]="group.items" [templateItem]="tmpl">
       </app-carousel>
     </div>
   </ng-container>
 </div>
+
+
+<ng-template #tmpl let-item="ctx">
+  <app-album-card [albumCoverUrl]="item.img" [albumTitle]="item.name" albumType="Playlist" [additionalInfo]="item.creator"></app-album-card>
+</ng-template>

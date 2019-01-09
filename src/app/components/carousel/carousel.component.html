@@ -1,23 +1,26 @@
 <div class="carousel-container">
   <div class="carousel-action-container" *ngIf="showPreviousBtn">
-    <button class="round-icon">
+    <button class="round-icon" (click)="scrollLeft()">
       <fa-icon [icon]="carretLeft"></fa-icon>
     </button>
   </div>
   <div class="list-container">
-    <ul class="carousel-item-list">
-      <!-- <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
-        <div *cdkVirtualFor="let item of items" class="example-item">{{item}}</div>
+    <div class="carousel-item-list" #carouselContainer>
+      <!-- <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="10">
+        <ng-container *cdkVirtualFor="let item of items">
+          <ng-container *ngTemplateOutlet="templateItem; context: {ctx:item}"></ng-container>
+        </ng-container>
       </cdk-virtual-scroll-viewport> -->
-      <ng-container *ngFor="let item of items">
+
+      <div class="carousel-item" *ngFor="let item of items" #carouselItem>
         <ng-container *ngTemplateOutlet="templateItem; context: {ctx:item}"></ng-container>
-      </ng-container>
-    </ul>
+      </div>
+    </div>
   </div>
 
 
   <div class="carousel-action-container" *ngIf="showNextBtn">
-    <button class="round-icon right">
+    <button class="round-icon right" (click)="scrollRight()">
       <fa-icon [icon]="carretRight"></fa-icon>
     </button>
   </div>
