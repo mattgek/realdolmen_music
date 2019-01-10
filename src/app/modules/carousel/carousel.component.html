@@ -1,54 +1,26 @@
 <div class="carousel-container">
-  <div class="carousel-action-container"
-       *ngIf="showPreviousBtn">
-    <button class="round-icon">
+  <div class="carousel-action-container" *ngIf="showPreviousBtn">
+    <button class="round-icon" (click)="scrollLeft()">
       <fa-icon [icon]="carretLeft"></fa-icon>
     </button>
   </div>
   <div class="list-container">
-    <ul class="carousel-item-list">
-      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
-                      albumTitle="Hit Collection"
-                      albumType="Album"
-                      additionalInfo="Fancy"></app-album-card>
-      <app-album-card albumCoverUrl="https://via.placeholder.com/400x226"
-                      albumTitle="Chinese Eyes"
-                      albumType="Fancy"
-                      additionalInfo="151K views"></app-album-card>
-      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
-                      albumTitle="Locomotion"
-                      albumType="Album"
-                      additionalInfo="Fancy"></app-album-card>
-      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
-                      albumTitle="Locomotion 2"
-                      albumType="Album"
-                      additionalInfo="Fancy"></app-album-card>
-      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
-                      albumTitle="Locomotion3"
-                      albumType="Album"
-                      additionalInfo="Fancy"></app-album-card>
-      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
-                      albumTitle="Locomotion4"
-                      albumType="Album"
-                      additionalInfo="Fancy"></app-album-card>
-      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
-                      albumTitle="Locomotion5"
-                      albumType="Album"
-                      additionalInfo="Fancy"></app-album-card>
-      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
-                      albumTitle="Locomotion6"
-                      albumType="Album"
-                      additionalInfo="Fancy"></app-album-card>
-      <app-album-card albumCoverUrl="https://via.placeholder.com/226x226"
-                      albumTitle="Locomotion7"
-                      albumType="Album"
-                      additionalInfo="Fancy"></app-album-card>
-    </ul>
+    <div class="carousel-item-list" #carouselContainer>
+      <!-- <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="10">
+        <ng-container *cdkVirtualFor="let item of items">
+          <ng-container *ngTemplateOutlet="templateItem; context: {ctx:item}"></ng-container>
+        </ng-container>
+      </cdk-virtual-scroll-viewport> -->
+
+      <div class="carousel-item" *ngFor="let item of items" #carouselItem>
+        <ng-container *ngTemplateOutlet="templateItem; context: {ctx:item}"></ng-container>
+      </div>
+    </div>
   </div>
 
 
-  <div class="carousel-action-container">
-    <button class="round-icon right">
+  <div class="carousel-action-container" *ngIf="showNextBtn">
+    <button class="round-icon right" (click)="scrollRight()">
       <fa-icon [icon]="carretRight"></fa-icon>
     </button>
   </div>
