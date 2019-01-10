@@ -8,16 +8,16 @@ const routes: Routes = [
     redirectTo: '/home'
   },
   {
-    path: 'home',
-    loadChildren: './pages/home/home.module#HomeModule'
-  },
-  {
     path: 'hotlist',
-    loadChildren: './pages/hotlist/hotlist.module#HotlistModule'
+    loadChildren: './hotlist/hotlist.module#HotlistModule'
   },
   {
     path: 'library',
-    loadChildren: './pages/library/library.module#LibraryModule'
+    loadChildren: './library/library.module#LibraryModule'
+  },
+  {
+    path: 'search',
+    loadChildren: './search/search.module#SearchModule'
   }
 ];
 
