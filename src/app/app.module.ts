@@ -1,29 +1,25 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AlbumCardModule } from './album-card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
-import { ArtistModule } from './artist';
-import { CarouselModule } from './carousel';
-import { HomeService } from './home/services';
-import { MenuModule } from './menu';
-import { HomeComponent } from './pages';
-import { ScrollClassModule } from './scroll-class';
+import { HomeModule } from './home';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent],
   imports: [
+    // application wide module
     BrowserModule,
-    AppRoutingModule,
-    MenuModule,
-    ScrollClassModule,
+    BrowserAnimationsModule,
     HttpClientModule,
-    AlbumCardModule,
-    ArtistModule,
-    CarouselModule
+
+    // routing
+    AppRoutingModule,
+
+    // initial route module
+    HomeModule
   ],
-  bootstrap: [AppComponent],
-  providers: [HomeService]
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
