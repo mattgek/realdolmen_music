@@ -10,6 +10,7 @@
 @import 'normalize';
 
 // Import external specific vendor styles
+@import '~@angular/cdk/overlay-prebuilt.css';
 
 // Import vendor overrides
 @import 'vendor-overrides';
