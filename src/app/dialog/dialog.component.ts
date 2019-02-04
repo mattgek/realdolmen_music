@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { OverlayReference } from './overlay-ref';
+import { DialogReference } from './dialog-ref';
 
 @Component({
-  selector: 'app-overlay',
-  templateUrl: './overlay.component.html',
-  styleUrls: ['./overlay.component.scss']
+  selector: 'app-dialog',
+  templateUrl: './dialog.component.html',
+  styleUrls: ['./dialog.component.scss']
 })
-export class OverlayComponent implements OnInit {
+export class DialogComponent implements OnInit {
   public addPlaylistFrm: FormGroup;
-  constructor(private overlayReference: OverlayReference, private fromBuilder: FormBuilder) {}
+  constructor(private dialogReference: DialogReference, private fromBuilder: FormBuilder) {}
 
   public ngOnInit(): void {
     this.addPlaylistFrm = this.fromBuilder.group({
@@ -20,10 +20,11 @@ export class OverlayComponent implements OnInit {
   }
 
   public onSubmit() {
+    // tslint:disable-next-line:no-console
     console.log(this.addPlaylistFrm.value);
   }
 
   public closeDialog() {
-    this.overlayReference.close();
+    this.dialogReference.close();
   }
 }

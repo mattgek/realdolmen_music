@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { OverlayService } from '../overlay/overlay.service';
+import { DialogService } from '../dialog/dialog.service';
 
 @Component({
   selector: 'app-library',
@@ -10,9 +10,9 @@ import { OverlayService } from '../overlay/overlay.service';
 export class LibraryComponent {
   public plusIcon = faPlus;
 
-  constructor(private overlay: OverlayService) {}
+  constructor(private dialog: DialogService) {}
 
   public openDialog() {
-    this.overlay.openDialog();
+    this.dialog.openDialog();
   }
 }

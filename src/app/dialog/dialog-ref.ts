@@ -1,6 +1,6 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 
-export class OverlayReference {
+export class DialogReference {
   constructor(private overlayRef: OverlayRef) {}
 
   public close(): void {

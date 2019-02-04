@@ -1,11 +1,11 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { Injectable, Injector } from '@angular/core';
-import { OverlayReference } from './overlay-ref';
-import { OverlayComponent } from './overlay.component';
+import { DialogReference } from './dialog-ref';
+import { DialogComponent } from './dialog.component';
 
 @Injectable()
-export class OverlayService {
+export class DialogService {
   constructor(private overlay: Overlay, private injector: Injector) {}
 
   public openDialog() {
@@ -25,7 +25,7 @@ export class OverlayService {
 
     // create overlay
     const overlayRef = this.overlay.create(c);
-    const dialogRef = new OverlayReference(overlayRef);
+    const dialogRef = new DialogReference(overlayRef);
 
     // attach overlay
     this.attachOverlay(overlayRef, dialogRef);
@@ -37,24 +37,24 @@ export class OverlayService {
     return dialogRef;
   }
 
-  private attachOverlay(overlayRef: OverlayRef, dialogRef: OverlayReference) {
+  private attachOverlay(overlayRef: OverlayRef, dialogRef: DialogReference) {
     // create injector
     const injector = this.createInjector(dialogRef);
 
     // create component portal with overlay and overlay reference as dependency
     // TODO: config for overlay
-    const componentPortal = new ComponentPortal(OverlayComponent, null, injector);
+    const componentPortal = new ComponentPortal(DialogComponent, null, injector);
 
     // attach overlay
     overlayRef.attach(componentPortal);
   }
 
-  private createInjector(dialogRef: OverlayReference) {
+  private createInjector(dialogRef: DialogReference) {
     // use weakmap for garbase collection purposes
     const injectionTokens = new WeakMap();
 
     // set token
-    injectionTokens.set(OverlayReference, dialogRef);
+    injectionTokens.set(DialogComponent, dialogRef);
 
     return new PortalInjector(this.injector, injectionTokens);
   }

@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { OverLayModule } from '../overlay';
-import { OverlayComponent } from '../overlay/overlay.component';
+import { DialogModule } from '../dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 import { AlbumCardModule } from '../single-value/album-card';
 import { TabsModule } from '../tabs';
 import {
@@ -27,9 +27,9 @@ import { LibraryRoutingModule } from './library.routing';
     LibraryRoutingModule,
     TabsModule,
     AlbumCardModule,
-    OverLayModule,
+    DialogModule,
     FontAwesomeModule
   ],
-  entryComponents: [OverlayComponent]
+  entryComponents: [DialogComponent]
 })
 export class LibraryModule {}
