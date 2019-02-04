@@ -1,0 +1,23 @@
+@import '../variables/_colors';
+
+$button-text-color: $color-text-primary;
+$button-primary-color: #065fd4;
+
+.btn {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: $button-text-color;
+  height: 36px;
+  border-radius: 2px;
+  min-width: 88px;
+  border: none;
+
+  &.btn-transparent {
+    background-color: transparent;
+  }
+
+  &.btn-primary {
+    background-color: $button-primary-color;
+  }
+}
