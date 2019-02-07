@@ -3,17 +3,14 @@
   <div class="overlay"></div>
 </div>
 <div class="content">
-  <ng-container *ngFor="let group of playlists">
-    <h1>{{group.group}}</h1>
+  <ng-container *ngFor="let item of chart$ | async">
+    <ng-container [ngSwitch]="item.type">
+      <app-album-card *ngSwitchCase="'album'" [albumCoverUrl]="item.img" [albumTitle]="item.name" albumType="Album"></app-album-card>
+      <app-artist *ngSwitchCase="'artist'" [artistUrl]="item.img" [artistName]="item.name" [followers]="2541"></app-artist>
+      <app-album-card *ngSwitchCase="'playlist'" [albumCoverUrl]="item.img" [albumTitle]="item.name" albumType="Playlist"></app-album-card>
+      <!-- <app-song *ngSwitchCase="'song'"></app-song> -->
+      <app-album-card *ngSwitchCase="'song'" [albumCoverUrl]="item.img" [albumTitle]="item.name" albumType="Song"></app-album-card>
+    </ng-container>
 
-    <div style="margin-bottom:56px;">
-      <app-carousel [items]="group.items" [templateItem]="tmpl">
-      </app-carousel>
-    </div>
   </ng-container>
 </div>
-
-
-<ng-template #tmpl let-item="ctx">
-  <app-album-card [albumCoverUrl]="item.img" [albumTitle]="item.name" albumType="Playlist" [additionalInfo]="item.creator"></app-album-card>
-</ng-template>

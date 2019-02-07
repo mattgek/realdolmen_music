@@ -9,7 +9,7 @@ import { IPlaylist } from '../model';
 export class PlaylistService implements IPlaylistService {
   constructor(private http: HttpClient) {}
 
-  public getPlaylists(): Observable<IPlaylist[]> {
+  public getPlaylist(id: string): Observable<IPlaylist[]> {
     return this.http.get<IPlaylist[]>(`${appConfig.baseUrl}playlist`);
   }
 }
