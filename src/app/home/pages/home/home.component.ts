@@ -7,16 +7,16 @@ import { IPlaylistService, PLAYLIST_SERVICE } from '../../../api';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public playlists: any;
+  playlists: any;
 
   constructor(@Inject(PLAYLIST_SERVICE) private playlistService: IPlaylistService) {}
 
-  public ngOnInit() {
+  ngOnInit() {
     // todo: remove subscribe and use groupBy of rxjs (but doesn't work, its seems)
     this.playlists = [];
-    this.playlistService.getPlaylists().subscribe((x) => {
+    this.playlistService.getPlaylists().subscribe(x => {
       const groupedValue = this.groupBy(x, 'group');
-      this.playlists = Object.keys(groupedValue).map((y) => {
+      this.playlists = Object.keys(groupedValue).map(y => {
         return {
           group: y,
           items: groupedValue[y]

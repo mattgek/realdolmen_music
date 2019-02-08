@@ -17,33 +17,33 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 })
 export class CarouselComponent implements AfterViewInit {
   @Input()
-  public items: any[];
+  items: any[];
 
   @Input()
-  public templateItem: TemplateRef<any>;
+  templateItem: TemplateRef<any>;
 
   @ViewChildren('carouselItem')
-  public children: QueryList<any>;
+  children: QueryList<any>;
 
   // icons
-  public carretLeft = faAngleLeft;
-  public carretRight = faAngleRight;
+  carretLeft = faAngleLeft;
+  carretRight = faAngleRight;
 
   // arrow buttons
-  public showPreviousBtn: boolean;
-  public showNextBtn: boolean;
+  showPreviousBtn: boolean;
+  showNextBtn: boolean;
 
   // index
-  public indexItem: number = 0;
+  indexItem: number = 0;
 
   @ViewChild('carouselContainer')
   private container: ElementRef;
 
-  public ngAfterViewInit() {
+  ngAfterViewInit() {
     this.calculateButtons();
   }
 
-  public scrollLeft() {
+  scrollLeft() {
     const elemNotCompletelyVisible = this.getFirstElementNotInView(false);
     if (elemNotCompletelyVisible) {
       this.container.nativeElement.scrollLeft = elemNotCompletelyVisible.getBoundingClientRect().left;
@@ -52,7 +52,7 @@ export class CarouselComponent implements AfterViewInit {
     }
   }
 
-  public scrollRight() {
+  scrollRight() {
     const elemNotCompletelyVisible = this.getFirstElementNotInView(true);
     if (elemNotCompletelyVisible) {
       this.container.nativeElement.scrollLeft = elemNotCompletelyVisible.getBoundingClientRect().left;
@@ -63,7 +63,7 @@ export class CarouselComponent implements AfterViewInit {
 
   private getFirstElementNotInView(right: boolean): HTMLElement {
     const direction = right ? +1 : -1;
-    const loop = right ? (index) => index < this.children.length : (index) => index > 0;
+    const loop = right ? index => index < this.children.length : index => index > 0;
 
     const children = this.children.toArray();
     const rectContainer = this.container.nativeElement.getBoundingClientRect();
@@ -84,7 +84,7 @@ export class CarouselComponent implements AfterViewInit {
   }
 
   private setIndexItem(elem: HTMLElement): void {
-    const children = this.children.toArray().map((x) => x.nativeElement);
+    const children = this.children.toArray().map(x => x.nativeElement);
     const i = children.indexOf(elem);
     this.indexItem = i > -1 ? i : 0;
   }

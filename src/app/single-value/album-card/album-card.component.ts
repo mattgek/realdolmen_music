@@ -6,13 +6,14 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./album-card.component.scss']
 })
 export class AlbumCardComponent {
+  ddef = 'askfjds';
   // decorators
   @Input()
-  public albumCoverUrl: string;
+  albumCoverUrl: string;
   @Input()
-  public albumTitle: string;
+  albumTitle: string;
   @Input()
-  public albumType: string;
+  albumType: string;
   @Input()
-  public additionalInfo: string;
+  additionalInfo: string;
 }

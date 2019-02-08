@@ -7,11 +7,11 @@ import { Component, Input } from '@angular/core';
 })
 export class ArtistComponent {
   @Input()
-  public artistUrl: string;
+  artistUrl: string;
 
   @Input()
-  public artistName: string;
+  artistName: string;
 
   @Input()
-  public followers: number;
+  followers: number;
 }

@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'readableNumber'
 })
 export class ReadableNumberPipe implements PipeTransform {
-  public transform(value: any, args?: any): any {
+  transform(value: any, args?: any): any {
     if (!value) {
       return '0';
     }
