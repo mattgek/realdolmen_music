@@ -5,15 +5,15 @@ import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angula
 })
 export class ScrollClassDirective {
   @Input()
-  public appScrollClass: number;
+  appScrollClass: number;
 
   @HostBinding('class.scrolled')
-  public hasMeetScrollingTreshold: boolean;
+  hasMeetScrollingTreshold: boolean;
 
   constructor(private el: ElementRef) {}
 
   @HostListener('window:scroll', ['$event'])
-  public onWindowScroll($event) {
+  onWindowScroll($event) {
     const positioningOnScreen = this.el.nativeElement.parentNode.getBoundingClientRect();
     this.hasMeetScrollingTreshold = positioningOnScreen.top <= this.appScrollClass;
   }

@@ -1,10 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { OverlayComponent } from './overlay.component';
+import { OverlayDirective } from './overlay.directive';
 
 @NgModule({
-  declarations: [OverlayComponent],
+  declarations: [OverlayDirective],
   imports: [CommonModule],
-  exports: [OverlayComponent]
+  exports: [OverlayDirective]
+  // providers: [
+  //   {
+  //     provide: COMPONENT_TYPE,
+  //     useClass: SquareCardComponent
+  //   }
+  // ]
 })
 export class OverLayModule {}
