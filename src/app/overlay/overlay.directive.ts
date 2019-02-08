@@ -1,27 +1,31 @@
-import { Directive, ElementRef, OnInit } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { fromEvent } from 'rxjs';
-import { OverlayService } from './overlay.service';
 
 @Directive({
   selector: '[appOverlay]'
 })
 export class OverlayDirective implements OnInit {
-  constructor(private el: ElementRef, private overlayService: OverlayService) {}
+  @Output() toggleHover = new EventEmitter();
 
-  public ngOnInit() {
+  constructor(private el: ElementRef) {} // @Inject(COMPONENT_TYPE) private host: SquareCardComponent) {}
+
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.toggleHover.emit(true);
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.toggleHover.emit(false);
+  }
+
+  ngOnInit() {
     fromEvent(this.el.nativeElement, 'mouseenter').subscribe(() => {
-      this.overlayService.showOverlay(this.el);
+      this.toggleHover.emit(true);
     });
 
-    /**
-     * this is not a good solution if you pass el as from where the event should trigger you get a flickering state
-     * meaning the component is dynamically generated but when hovering on that component
-     * the mouse leave event on el is triggered
-     *
-     * fromEvent(this.el.nativeElement, 'mouseleave').subscribe(() => {
-     * this.overlayService.closeOverlay();
-     *  });
-     *
-     */
+    fromEvent(this.el.nativeElement, 'mouseleave').subscribe(() => {
+      this.toggleHover.emit(false);
+    });
   }
 }

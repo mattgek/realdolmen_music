@@ -8,15 +8,15 @@ import { TabComponent } from '../tab';
 })
 export class TabsComponent implements AfterContentInit {
   @ContentChildren(TabComponent)
-  public tabs: QueryList<TabComponent>;
+  tabs: QueryList<TabComponent>;
 
-  public activeTab: TabComponent;
+  activeTab: TabComponent;
 
-  public ngAfterContentInit() {
+  ngAfterContentInit() {
     this.activeTab = this.tabs.toArray()[0];
   }
 
-  public setActiveTab(activeTab: TabComponent) {
+  setActiveTab(activeTab: TabComponent) {
     this.activeTab = activeTab;
   }
 }

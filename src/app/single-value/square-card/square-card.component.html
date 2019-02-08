@@ -1,9 +1,32 @@
 <div class="square-card-container">
   <div class="square-cover"
-       appOverlay>
+       appOverlay
+       (toggleHover)="toggleOverlay($event)">
+    <ng-container *ngIf="test">
+      <ng-container *ngTemplateOutlet="overlayTemp"></ng-container>
+    </ng-container>
     <ng-content select="[cover]"></ng-content>
   </div>
   <div class="square-detail">
     <ng-content select="[detail]"></ng-content>
   </div>
 </div>
+
+<ng-template #overlayTemp>
+  <div class="overlay-area">
+    <div class="action-button-container">
+      <button class="action-button"
+              (click)="openPlayer()">
+        <fa-icon [icon]="playSongIcon"
+                 size="lg"></fa-icon>
+      </button>
+    </div>
+    <div class="divider"></div>
+    <div class="action-button-container">
+      <button class="action-button">
+        <fa-icon [icon]="moreDetails"
+                 size="lg"></fa-icon>
+      </button>
+    </div>
+  </div>
+</ng-template>

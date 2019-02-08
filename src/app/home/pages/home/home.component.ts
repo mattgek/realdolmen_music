@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   constructor(@Inject(CHART_SERVICE) private chartService: IChartService) {}
 
-  public ngOnInit() {
+  ngOnInit() {
     // todo: remove subscribe and use groupBy of rxjs (but doesn't work, its seems)
     this.chart$ = this.chartService.getChart();
   }

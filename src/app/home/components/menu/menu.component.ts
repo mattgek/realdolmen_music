@@ -7,11 +7,11 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
-  public faSearchIcon = faSearch;
-  public hasScrolled = false;
+  faSearchIcon = faSearch;
+  hasScrolled = false;
 
   @HostListener('window:scroll', [])
-  public onWindowScroll() {
+  onWindowScroll() {
     this.hasScrolled = this.getScrollPosition() > 25;
   }
 
