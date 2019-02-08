@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
 import { fromEvent } from 'rxjs';
 
 @Directive({
@@ -9,15 +9,15 @@ export class OverlayDirective implements OnInit {
 
   constructor(private el: ElementRef) {} // @Inject(COMPONENT_TYPE) private host: SquareCardComponent) {}
 
-  @HostListener('mouseenter')
-  onMouseEnter() {
-    this.toggleHover.emit(true);
-  }
+  // @HostListener('mouseenter')
+  // onMouseEnter() {
+  //   this.toggleHover.emit(true);
+  // }
 
-  @HostListener('mouseleave')
-  onMouseLeave() {
-    this.toggleHover.emit(false);
-  }
+  // @HostListener('mouseleave')
+  // onMouseLeave() {
+  //   this.toggleHover.emit(false);
+  // }
 
   ngOnInit() {
     fromEvent(this.el.nativeElement, 'mouseenter').subscribe(() => {
