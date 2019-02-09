@@ -1,7 +1,12 @@
 <div class="artist-container">
   <a href="#"
      class="artist-link">
-    <div class="artist-cover">
+    <div class="artist-cover"
+         appOverlay
+         (toggleOverlay)="toggleOverlay($event)">
+      <ng-container *ngIf="show">
+        <app-overlay></app-overlay>
+      </ng-container>
       <img [src]="artistUrl"
            alt="artist-image" />
     </div>

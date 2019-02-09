@@ -6,6 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./artist.component.scss']
 })
 export class ArtistComponent {
+  show: boolean;
+
   @Input()
   artistUrl: string;
 
@@ -14,4 +16,8 @@ export class ArtistComponent {
 
   @Input()
   followers: number;
+
+  toggleOverlay(state: boolean) {
+    this.show = state;
+  }
 }

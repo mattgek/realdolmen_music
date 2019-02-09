@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { faEllipsisV, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-square-card',
@@ -7,12 +6,9 @@ import { faEllipsisV, faPlay } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./square-card.component.scss']
 })
 export class SquareCardComponent {
-  playSongIcon = faPlay;
-  moreDetails = faEllipsisV;
+  show: boolean;
 
-  test: boolean;
-
-  toggleOverlay(state: any) {
-    this.test = state;
+  toggleOverlay(state: boolean) {
+    this.show = state;
   }
 }
