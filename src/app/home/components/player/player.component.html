@@ -1,3 +1,91 @@
-<p>
-  player works!
-</p>
+<div class="player-container">
+  <div class="player-controls">
+    <button class="btn icon-btn">
+      <fa-icon [icon]="previousIcon"
+               size="lg"></fa-icon>
+    </button>
+    <button class="btn icon-btn"
+            *ngIf="!isPlaying">
+      <fa-icon [icon]="playIcon"
+               size="lg"></fa-icon>
+    </button>
+    <button class="btn icon-btn"
+            *ngIf="isPlaying">
+      <fa-icon [icon]="pauseIcon"
+               size="lg"></fa-icon>
+    </button>
+    <button class="btn icon-btn">
+      <fa-icon [icon]="nextIcon"
+               size="lg"></fa-icon>
+    </button>
+  </div>
+  <div class="player-track">
+    <div class="track-container">
+      <div class="track-header">
+        <div class="track-title">
+          dfjkl;fjdsklf;jdfl;kdsjfldks;fjdaklfjdflk;sjfds;
+        </div>
+        <div class="track-actions">
+          <button class="btn icon-btn">
+            <fa-icon [icon]="addToPlaylistIcon"
+                     size="1x"></fa-icon>
+          </button>
+          <button class="btn icon-btn">
+            <fa-icon [icon]="loveIcon"
+                     size="1x"></fa-icon>
+          </button>
+        </div>
+      </div>
+      <div class="track-play-info">
+        <div class="track-slider-counter slider-counter-current">00:00</div>
+        <div class="player-bar">
+          <div class="slider-track-default"></div>
+          <div class="slider-track-active"></div>
+          <input class="slider-track-input mousetrap"
+                 type="range"
+                 step="1"
+                 min="{{minSongTime}}"
+                 max="{{maxSongTime}}"
+                 value="{{currentSongTime}}">
+        </div>
+        <div class="track-slider-counter slider-counter-max">04:58</div>
+      </div>
+    </div>
+  </div>
+  <div class="player-options">
+    <div class="player-options-actions">
+      <button class="btn icon-btn">
+        <fa-icon [icon]="shuffleIcon"
+                 size="1x"></fa-icon>
+      </button>
+      <button class="btn icon-btn"
+              *ngIf="!isMuted">
+        <fa-icon [icon]="volumeOnIcon"
+                 size="1x"></fa-icon>
+      </button>
+      <button class="btn icon-btn"
+              *ngIf="isPlaying">
+        <fa-icon [icon]="muteIcon"
+                 size="1x"></fa-icon>
+      </button>
+      <button class="btn icon-btn">
+        <fa-icon [icon]="audioSettingsIcon"
+                 size="1x"></fa-icon>
+      </button>
+    </div>
+    <div class="divider"></div>
+    <div class="queue-list">
+      <button class="btn icon-btn">
+        <figure class="thumbnail">
+          <div class="picture overlay-hidden">
+            <img crossorigin="anonymous"
+                 class="picture-img active"
+                 alt=""
+                 src="https://e-cdns-images.dzcdn.net/images/cover/e0d841c77765ef15bfb88b91ec8cab46/28x28-000000-80-0-0.jpg">
+          </div>
+        </figure>
+        <div class="queuelist-label">Queue</div>
+      </button>
+    </div>
+  </div>
+</div>
