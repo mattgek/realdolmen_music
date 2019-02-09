@@ -4,7 +4,7 @@
        (toggleOverlay)="toggleOverlay($event)">
     <!-- <div appOverlay> -->
     <ng-container *ngIf="show">
-      <app-overlay></app-overlay>
+      <app-overlay [item]="item"></app-overlay>
     </ng-container>
     <ng-content select="[cover]"></ng-content>
     <!-- </div> -->

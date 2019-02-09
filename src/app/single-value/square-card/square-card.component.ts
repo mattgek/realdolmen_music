@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IChart } from 'src/app/api';
 
 @Component({
   selector: 'app-square-card',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class SquareCardComponent {
   show: boolean;
+  @Input() item: IChart;
 
   toggleOverlay(state: boolean) {
     this.show = state;

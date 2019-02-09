@@ -16,6 +16,10 @@ $button-primary-color: #065fd4;
 .btn-transparent {
   background-color: transparent;
 }
+.btn-diabled {
+  cursor: default;
+  opacity: 0.3;
+}
 
 .btn-primary {
   background-color: $button-primary-color;

@@ -7,14 +7,14 @@
       <ng-container *ngIf="show">
         <app-overlay></app-overlay>
       </ng-container>
-      <img [src]="artistUrl"
+      <img [src]="artist.img"
            alt="artist-image" />
     </div>
   </a>
   <div class="artist-info">
     <div class="primary-label">
       <a href="#">
-        <span>{{artistName}}</span>
+        <span>{{artist.name}}</span>
       </a>
     </div>
     <div class="secondary-label">

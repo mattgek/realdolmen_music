@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { faEllipsisV, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { IChart } from '../api';
+import { MusicService } from '../home/components';
 
 @Component({
   selector: 'app-overlay',
@@ -9,14 +11,14 @@ import { faEllipsisV, faPlay } from '@fortawesome/free-solid-svg-icons';
 export class OverlayComponent {
   playSongIcon = faPlay;
   moreDetails = faEllipsisV;
-  // show: boolean;
 
-  // constructor(private el: ElementRef) {}
+  @Input() item: IChart;
 
-  // ngOnInit() {
-  //   this.show = true;
-  //   fromEvent(this.el.nativeElement, 'mouseleave').subscribe(() => {
-  //     this.show = false;
-  //   });
-  // }
+  constructor(private musicService: MusicService) {}
+
+  play() {
+    if (this.item) {
+      this.musicService.selectTrack(this.item);
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IChart } from 'src/app/api';
 
 @Component({
   selector: 'app-artist',
@@ -8,14 +9,7 @@ import { Component, Input } from '@angular/core';
 export class ArtistComponent {
   show: boolean;
 
-  @Input()
-  artistUrl: string;
-
-  @Input()
-  artistName: string;
-
-  @Input()
-  followers: number;
+  @Input() artist: IChart;
 
   toggleOverlay(state: boolean) {
     this.show = state;

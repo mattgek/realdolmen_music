@@ -46,7 +46,8 @@ export class ChartService implements IChartService {
               type: 'song',
               id: track.id,
               img: track.album.cover_medium,
-              name: track.title
+              name: track.title,
+              preview: track.preview
             });
           });
           return result;

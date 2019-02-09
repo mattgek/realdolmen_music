@@ -9,9 +9,8 @@ export class OverlayDirective implements OnInit {
   @Output() toggleOverlay = new EventEmitter();
 
   constructor(
-    private el: ElementRef // private viewContainer: ViewContainerRef,
-  ) // private resolver: ComponentFactoryResolver
-  {} // @Inject(COMPONENT_TYPE) private host: SquareCardComponent) {}
+    private el: ElementRef // private viewContainer: ViewContainerRef, // private resolver: ComponentFactoryResolver
+  ) {} // @Inject(COMPONENT_TYPE) private host: SquareCardComponent) {}
 
   // @HostListener('mouseenter')
   // onMouseEnter() {

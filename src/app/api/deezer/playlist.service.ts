@@ -14,9 +14,11 @@ export class PlaylistService implements IPlaylistService {
     return this.jsonP
       .get(`https://api.deezer.com/playlist/${id}?output=jsonp&callback=JSONP_CALLBACK&q=`)
       .pipe(
-        map((response) => {
+        map(response => {
+          console.log(response);
+
           const playlist: IPlaylistDto = response.json();
-          return playlist.tracks.data.map((track) => {
+          return playlist.tracks.data.map(track => {
             return {
               id: track.id,
               img: track.album.cover_medium,

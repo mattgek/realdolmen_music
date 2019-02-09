@@ -6,22 +6,14 @@
   <ng-container *ngFor="let item of chart$ | async">
     <ng-container [ngSwitch]="item.type">
       <app-album-card *ngSwitchCase="'album'"
-                      [albumCoverUrl]="item.img"
-                      [albumTitle]="item.name"
-                      albumType="Album"></app-album-card>
+                      [item]="item"></app-album-card>
       <app-artist *ngSwitchCase="'artist'"
-                  [artistUrl]="item.img"
-                  [artistName]="item.name"
-                  [followers]="2541"></app-artist>
+                  [artist]="item"></app-artist>
       <app-album-card *ngSwitchCase="'playlist'"
-                      [albumCoverUrl]="item.img"
-                      [albumTitle]="item.name"
-                      albumType="Playlist"></app-album-card>
+                      [item]="item"></app-album-card>
       <!-- <app-song *ngSwitchCase="'song'"></app-song> -->
       <app-album-card *ngSwitchCase="'song'"
-                      [albumCoverUrl]="item.img"
-                      [albumTitle]="item.name"
-                      albumType="Song"></app-album-card>
+                      [item]="item"></app-album-card>
     </ng-container>
 
   </ng-container>
