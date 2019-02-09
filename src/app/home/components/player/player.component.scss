@@ -161,12 +161,15 @@
       flex: 1;
       padding-left: 20px;
 
-      button {
+      .queue-list-btn {
         width: 100%;
-        display: flex;
         text-transform: capitalize;
-        border-radius: 0;
         height: 42px;
+        border-radius: 4px;
+        display: flex;
+        padding: 8px 12px 8px 8px;
+        transition-duration: 0.15s;
+        transition-property: background-color;
 
         .thumbnail {
           border-radius: 4px;
@@ -175,14 +178,18 @@
           margin: 0;
           max-height: 100%;
           max-width: 100%;
-          position: relative;
           overflow: hidden;
+          position: relative;
           transform: translateZ(0);
           vertical-align: top;
 
           .picture {
             display: block;
             position: relative;
+          }
+          .picture-img {
+            border: 0;
+            vertical-align: top;
           }
         }
 
