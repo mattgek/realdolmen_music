@@ -29,3 +29,9 @@ $color-secondary: $color-text-secondary;
   line-height: 20px;
   margin-top: 4px;
 }
+
+:host {
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 16px;
+}

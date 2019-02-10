@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { IPlaylistService, PLAYLIST_SERVICE } from '../../../api';
+import { Observable } from 'rxjs';
+import { CHART_SERVICE, IChart, IChartService } from '../../../api';
 
 @Component({
   selector: 'app-home',
@@ -7,28 +8,12 @@ import { IPlaylistService, PLAYLIST_SERVICE } from '../../../api';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public playlists: any;
+  public chart$: Observable<IChart[]>;
 
-  constructor(@Inject(PLAYLIST_SERVICE) private playlistService: IPlaylistService) {}
+  constructor(@Inject(CHART_SERVICE) private chartService: IChartService) {}
 
-  public ngOnInit() {
+  ngOnInit() {
     // todo: remove subscribe and use groupBy of rxjs (but doesn't work, its seems)
-    this.playlists = [];
-    this.playlistService.getPlaylists().subscribe((x) => {
-      const groupedValue = this.groupBy(x, 'group');
-      this.playlists = Object.keys(groupedValue).map((y) => {
-        return {
-          group: y,
-          items: groupedValue[y]
-        };
-      });
-    });
-  }
-
-  private groupBy(xs, key) {
-    return xs.reduce((rv, x) => {
-      (rv[x[key]] = rv[x[key]] || []).push(x);
-      return rv;
-    }, {});
+    this.chart$ = this.chartService.getChart();
   }
 }
