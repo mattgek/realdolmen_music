@@ -1,7 +1,6 @@
 <app-square-card>
   <ng-container cover>
-    <a href="#"
-       class="album-cover-link">
+    <a class="album-cover-link">
       <img [src]="albumCoverUrl"
            alt="album-cover-image" />
     </a>
@@ -10,8 +9,9 @@
     <div class="primary-label">
       <span>{{albumTitle}}</span>
     </div>
-    <div class="secondary-label">
-      <span>{{albumType}} • {{additionalInfo}}</span>
+    <div class="secondary-label"
+         *ngIf="albumType">
+      <span>{{albumType}} <span *ngIf="additionalInfo">• {{additionalInfo}}</span> </span>
     </div>
   </ng-container>
 </app-square-card>

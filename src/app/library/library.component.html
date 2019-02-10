@@ -6,7 +6,10 @@
 </div>
 <app-tabs>
   <app-tab label="playlists">
-    <app-playlists></app-playlists>
+    <app-album-card albumCoverUrl="https://www.gstatic.com/youtube/media/ytm/images/pbg/create-playlist-@210.png"
+                    albumTitle="Playlist"
+                    (click)="openDialog()"></app-album-card>
+    <!-- <app-playlists></app-playlists> -->
   </app-tab>
   <app-tab label="albums">
     <app-albums></app-albums>
