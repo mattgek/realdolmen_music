@@ -84,23 +84,25 @@
                  size="1x"></fa-icon>
       </button>
     </div>
-    <div class="divider"></div>
-    <div class="queue-list">
-      <button class="btn icon-btn queue-list-btn"
-              type="button">
-        <figure class="thumbnail">
-          <div class="picture overlay-hidden">
-            <img crossorigin="anonymous"
-                 class="picture-img active"
-                 alt=""
-                 src="https://e-cdns-images.dzcdn.net/images/cover/e0d841c77765ef15bfb88b91ec8cab46/28x28-000000-80-0-0.jpg">
-          </div>
-        </figure>
-        <div *ngIf="selectedTrackList$ | async"
-             class="queuelist-label">
-          Queue</div>
-      </button>
-    </div>
+    <ng-container *ngIf="queueList$$ | async">
+      <div class="divider"></div>
+      <div class="queue-list">
+        <button class="btn icon-btn queue-list-btn"
+                type="button">
+          <figure class="thumbnail">
+            <div class="picture overlay-hidden">
+              <img crossorigin="anonymous"
+                   class="picture-img active"
+                   alt=""
+                   src="https://e-cdns-images.dzcdn.net/images/cover/e0d841c77765ef15bfb88b91ec8cab46/28x28-000000-80-0-0.jpg">
+            </div>
+          </figure>
+          <div class="queuelist-label">
+            Queue</div>
+        </button>
+      </div>
+
+    </ng-container>
   </div>
 </div>
 

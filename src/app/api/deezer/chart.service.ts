@@ -6,9 +6,7 @@ import { IChartService } from '../interface';
 import { IChart } from '../model';
 import { IChartDto } from './model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ChartService implements IChartService {
   constructor(private jsonP: Jsonp) {}
 

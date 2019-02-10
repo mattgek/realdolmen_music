@@ -12,7 +12,7 @@ import {
   faVolumeUp
 } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, take } from 'rxjs/operators';
 import { ITrackDto } from 'src/app/api/deezer/model/track.dto';
 import { MusicService } from './service';
 
@@ -37,7 +37,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   isPlaying: boolean;
   noNext: boolean = true;
-  noPrevious: boolean;
+  noPrevious: boolean = true;
   isMuted: boolean;
 
   minSongTime: string;
@@ -45,13 +45,14 @@ export class PlayerComponent implements OnInit, OnDestroy {
   currentSongTime: number = 0;
   maxTime: number;
   minTime: number = 0;
-  currentPlayingIndex: number = 0;
+  currentPlayingIndex: number;
 
   audioPlaying$: Subject<ITrackDto>;
-  queueList$: Observable<ITrackDto[]>;
   selectedTrackList$: Observable<ITrackDto[]>;
+  queueList$: Observable<ITrackDto[]>;
   private nextSub: Subscription;
   private previousSub: Subscription;
+  private selectedTrackListSub: Subscription;
 
   constructor(private musicService: MusicService) {}
 
@@ -61,11 +62,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.musicService.audio.ontimeupdate = this.handleTimeUpdate.bind(this);
     this.musicService.audio.onplay = this.handleOnPlaying.bind(this);
 
-    this.selectedTrackList$ = this.musicService.getCurrentTrackList().pipe(distinctUntilChanged());
-    this.queueList$ = this.selectedTrackList$;
+    this.queueList$ = this.musicService.getCurrentTrackList().pipe(distinctUntilChanged());
+    this.selectedTrackList$ = this.queueList$;
 
-    this.queueList$.subscribe(tracks => {
-      if (tracks && this.currentPlayingIndex === 0) {
+    this.selectedTrackListSub = this.selectedTrackList$.subscribe(tracks => {
+      this.currentPlayingIndex = 0;
+      if (tracks) {
         this.musicService.play(tracks[0]);
         this.audioPlaying$.next(tracks[0]);
 
@@ -79,6 +81,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.nextSub.unsubscribe();
     this.previousSub.unsubscribe();
+    this.selectedTrackListSub.unsubscribe();
   }
 
   handleOnPlaying(e: this): any {
@@ -86,6 +89,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
   handleAudioEnded(e: this): any {
     this.isPlaying = false;
+    this.next();
   }
 
   handleTimeUpdate(e: this): any {
@@ -97,7 +101,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   play() {
-    if (this.musicService.audio.paused) {
+    if (this.musicService.audio.paused && this.musicService.audio.src) {
       this.isPlaying = true;
       this.musicService.audio.play();
     }
@@ -111,11 +115,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   next() {
-    this.nextSub = this.queueList$.subscribe(tracks => {
+    this.nextSub = this.selectedTrackList$.pipe(take(1)).subscribe(tracks => {
       if (tracks.indexOf(tracks[this.currentPlayingIndex + 1]) > -1) {
         this.currentPlayingIndex++;
-        this.musicService.play(tracks[this.currentPlayingIndex]);
-        this.audioPlaying$.next(tracks[this.currentPlayingIndex]);
+
+        if (tracks[this.currentPlayingIndex].preview) {
+          this.musicService.play(tracks[this.currentPlayingIndex]);
+          this.audioPlaying$.next(tracks[this.currentPlayingIndex]);
+        } else {
+          this.next();
+        }
         this.noPrevious = false;
       } else {
         this.noNext = true;
@@ -124,12 +133,19 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   previous() {
-    this.previousSub = this.queueList$.subscribe(tracks => {
+    this.previousSub = this.selectedTrackList$.pipe(take(1)).subscribe(tracks => {
       if (tracks.indexOf(tracks[this.currentPlayingIndex - 1]) > -1) {
         this.currentPlayingIndex--;
-        this.musicService.play(tracks[this.currentPlayingIndex]);
-        this.audioPlaying$.next(tracks[this.currentPlayingIndex]);
+
+        if (tracks[this.currentPlayingIndex].preview) {
+          this.musicService.play(tracks[this.currentPlayingIndex]);
+          this.audioPlaying$.next(tracks[this.currentPlayingIndex]);
+        } else {
+          this.previous();
+        }
         this.noNext = false;
+      } else {
+        this.noPrevious = true;
       }
     });
   }

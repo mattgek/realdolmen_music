@@ -8,9 +8,7 @@ import { IPlaylistDto } from './model/playlist.dto';
 import { ITrackDto } from './model/track.dto';
 import { ITracksDto } from './model/tracks.dto';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PlaylistService implements IPlaylistService {
   constructor(private jsonP: Jsonp) {}
 

@@ -1,6 +1,14 @@
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
-import { IChart, IPlaylistService, PLAYLIST_SERVICE } from 'src/app/api';
+import {
+  ALBUM_SERVICE,
+  IAlbumService,
+  IChart,
+  IPlaylistService,
+  ITrackService,
+  PLAYLIST_SERVICE,
+  TRACK_SERVICE
+} from 'src/app/api';
 import { ITrackDto } from 'src/app/api/deezer/model/track.dto';
 
 @Injectable({
@@ -9,36 +17,42 @@ import { ITrackDto } from 'src/app/api/deezer/model/track.dto';
 export class MusicService implements OnDestroy {
   audio: HTMLAudioElement;
   currentTracks: Subject<ITrackDto[]>;
-  private playlistTrackSub: Subscription;
-  // trackList: ITrackDto[] = [];
 
-  constructor(@Inject(PLAYLIST_SERVICE) private playlistService: IPlaylistService) {
+  private playlistTrackSub: Subscription;
+  private albumTracksSub: Subscription;
+  private trackSub: Subscription;
+
+  constructor(
+    @Inject(PLAYLIST_SERVICE) private playlistService: IPlaylistService,
+    @Inject(ALBUM_SERVICE) private albumService: IAlbumService,
+    @Inject(TRACK_SERVICE) private trackService: ITrackService
+  ) {
     this.audio = new Audio();
     this.currentTracks = new BehaviorSubject<ITrackDto[]>(undefined);
   }
 
   ngOnDestroy() {
     this.playlistTrackSub.unsubscribe();
+    this.albumTracksSub.unsubscribe();
+    this.trackSub.unsubscribe();
   }
 
   load(url: string) {
-    if (url) {
-      console.log('url', url);
-
-      this.audio.src = url;
-      this.audio.load();
-    }
+    this.audio.src = url;
+    this.audio.load();
   }
 
   selectedTracklist(track: IChart) {
     switch (track.type) {
-      case 'track':
-        // this.trackList.push(track);
-        // this.currentTracks.next(this.trackList);
+      case 'song':
+        this.trackSub = this.trackService
+          .getTrack(track.id)
+          .subscribe(trk => this.currentTracks.next([trk]));
         break;
       case 'album':
-        debugger;
-        // this.trackList = this.currentTracks.next(this.trackList);
+        this.albumTracksSub = this.albumService
+          .getAlbumTracks(track.tracklist)
+          .subscribe(tracks => this.currentTracks.next(tracks));
         break;
       case 'artist':
         // this.trackList.push(track);
@@ -53,10 +67,8 @@ export class MusicService implements OnDestroy {
   }
 
   play(track: ITrackDto) {
-    if (track && track.preview) {
-      this.load(track.preview);
-      this.audio.play();
-    }
+    this.load(track.preview);
+    this.audio.play();
   }
 
   getCurrentTrackList(): Observable<ITrackDto[]> {

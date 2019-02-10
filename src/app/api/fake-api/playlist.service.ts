@@ -9,6 +9,9 @@ import { IPlaylist } from '../model';
 export class PlaylistService implements IPlaylistService {
   constructor(private http: HttpClient) {}
 
+  getPlaylistTracks(url: string): Observable<any> {
+    throw new Error('Method not implemented.');
+  }
   public getPlaylist(id: string): Observable<IPlaylist[]> {
     return this.http.get<IPlaylist[]>(`${appConfig.baseUrl}playlist`);
   }

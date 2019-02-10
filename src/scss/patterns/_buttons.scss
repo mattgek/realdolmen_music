@@ -12,6 +12,11 @@ $button-primary-color: #065fd4;
   border-radius: 2px;
   width: 88px;
   border: none;
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
 }
 .btn-transparent {
   background-color: transparent;
