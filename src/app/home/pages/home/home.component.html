@@ -3,18 +3,22 @@
   <div class="overlay"></div>
 </div>
 <div class="content">
-  <ng-container *ngFor="let item of chart$ | async">
+  <ng-container *ngFor="let item of chart$ | async; let first: first">
     <ng-container [ngSwitch]="item.type">
       <app-album-card *ngSwitchCase="'album'"
                       [item]="item"></app-album-card>
-      <app-artist *ngSwitchCase="'artist'"
-                  [artist]="item"></app-artist>
       <app-album-card *ngSwitchCase="'playlist'"
                       [item]="item"></app-album-card>
       <!-- <app-song *ngSwitchCase="'song'"></app-song> -->
       <app-album-card *ngSwitchCase="'song'"
                       [item]="item"></app-album-card>
     </ng-container>
+  </ng-container>
 
+
+  <h1>Artists</h1>
+
+  <ng-container *ngFor="let artist of artists$ | async">
+    <app-artist [artist]="artist"></app-artist>
   </ng-container>
 </div>

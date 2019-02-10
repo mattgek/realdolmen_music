@@ -10,4 +10,6 @@ export interface IArtistDto {
   radio: boolean;
   tracklist: string;
   position?: number;
+  nb_album: number;
+  nb_fan: number;
 }

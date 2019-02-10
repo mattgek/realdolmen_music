@@ -6,7 +6,7 @@
     <ng-container *ngIf="show">
       <app-overlay [item]="artist"></app-overlay>
     </ng-container>
-    <img [src]="artist.img"
+    <img [src]="artist.picture_medium"
          alt="artist-image" />
   </div>
 
@@ -18,7 +18,7 @@
       </a>
     </div>
     <div class="secondary-label">
-      <span>{{followers | readableNumber}} followers</span>
+      <span>{{artist.nb_fan | readableNumber}} followers</span>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IChart } from 'src/app/api';
+import { IArtistDto } from 'src/app/api/deezer/model/artist.dto';
 
 @Component({
   selector: 'app-artist',
@@ -9,7 +9,7 @@ import { IChart } from 'src/app/api';
 export class ArtistComponent {
   show: boolean;
 
-  @Input() artist: IChart;
+  @Input() artist: IArtistDto;
 
   toggleOverlay(state: boolean) {
     this.show = state;
