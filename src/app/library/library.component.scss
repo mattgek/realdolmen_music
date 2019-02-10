@@ -1,1 +1,15 @@
-// todo
+@import '../../scss/variables/_index';
+
+$color-primary: $color-text-primary;
+$color-secondary: $color-text-secondary;
+
+.cover-img {
+  width: inherit;
+}
+
+.primary-label {
+  color: $color-primary;
+  font-size: 16px;
+  font-weight: 350;
+  margin-top: 8px;
+}

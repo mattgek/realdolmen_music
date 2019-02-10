@@ -54,7 +54,7 @@ export class DialogService {
     const injectionTokens = new WeakMap();
 
     // set token
-    injectionTokens.set(DialogComponent, dialogRef);
+    injectionTokens.set(DialogReference, dialogRef);
 
     return new PortalInjector(this.injector, injectionTokens);
   }

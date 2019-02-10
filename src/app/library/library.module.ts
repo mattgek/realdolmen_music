@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DialogModule } from '../dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-import { AlbumCardModule } from '../single-value/album-card';
+import { RoundCardModule } from '../single-value/round-card';
 import { TabsModule } from '../tabs';
 import {
   AlbumsComponent,
@@ -26,7 +26,7 @@ import { LibraryRoutingModule } from './library.routing';
     CommonModule,
     LibraryRoutingModule,
     TabsModule,
-    AlbumCardModule,
+    RoundCardModule,
     DialogModule,
     FontAwesomeModule
   ],
