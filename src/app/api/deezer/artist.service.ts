@@ -11,7 +11,7 @@ export class ArtistService implements IArtistService {
   constructor(private jsonP: Jsonp) {}
 
   getArtistTracks(url: string): Observable<ITrackDto[]> {
-    return this.jsonP.get(`${url}?output=jsonp&callback=JSONP_CALLBACK&q=`).pipe(
+    return this.jsonP.get(`${url}&output=jsonp&callback=JSONP_CALLBACK&q=`).pipe(
       map(response => {
         const artist: ITracksDto = response.json();
         return artist.data.map(track => {

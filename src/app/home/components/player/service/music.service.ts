@@ -2,7 +2,9 @@ import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import {
   ALBUM_SERVICE,
+  ARTIST_SERVICE,
   IAlbumService,
+  IArtistService,
   IChart,
   IPlaylistService,
   ITrackService,
@@ -21,11 +23,13 @@ export class MusicService implements OnDestroy {
   private playlistTrackSub: Subscription;
   private albumTracksSub: Subscription;
   private trackSub: Subscription;
+  private artistTracksSub: Subscription;
 
   constructor(
     @Inject(PLAYLIST_SERVICE) private playlistService: IPlaylistService,
     @Inject(ALBUM_SERVICE) private albumService: IAlbumService,
-    @Inject(TRACK_SERVICE) private trackService: ITrackService
+    @Inject(TRACK_SERVICE) private trackService: ITrackService,
+    @Inject(ARTIST_SERVICE) private artistService: IArtistService
   ) {
     this.audio = new Audio();
     this.currentTracks = new BehaviorSubject<ITrackDto[]>(undefined);
@@ -35,6 +39,7 @@ export class MusicService implements OnDestroy {
     this.playlistTrackSub.unsubscribe();
     this.albumTracksSub.unsubscribe();
     this.trackSub.unsubscribe();
+    this.artistTracksSub.unsubscribe();
   }
 
   load(url: string) {
@@ -55,8 +60,9 @@ export class MusicService implements OnDestroy {
           .subscribe(tracks => this.currentTracks.next(tracks));
         break;
       case 'artist':
-        // this.trackList.push(track);
-        // this.currentTracks.next(this.trackList);
+        this.artistTracksSub = this.artistService
+          .getArtistTracks(track.tracklist)
+          .subscribe(tracks => this.currentTracks.next(tracks));
         break;
       case 'playlist':
         this.playlistTrackSub = this.playlistService

@@ -24,6 +24,7 @@ $action-button-heigth: 48px;
     .action-button {
       width: $action-button-width;
       height: $action-button-heigth;
+      color: $color-text-primary;
       border: none;
       overflow: hidden;
       background: transparent;

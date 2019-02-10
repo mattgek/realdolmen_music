@@ -1,19 +1,19 @@
 <div class="artist-container">
-  <a href="#"
-     class="artist-link">
-    <div class="artist-cover"
-         appOverlay
-         (toggleOverlay)="toggleOverlay($event)">
-      <ng-container *ngIf="show">
-        <app-overlay></app-overlay>
-      </ng-container>
-      <img [src]="artist.img"
-           alt="artist-image" />
-    </div>
-  </a>
+
+  <div class="artist-cover"
+       appOverlay
+       (toggleOverlay)="toggleOverlay($event)">
+    <ng-container *ngIf="show">
+      <app-overlay [item]="artist"></app-overlay>
+    </ng-container>
+    <img [src]="artist.img"
+         alt="artist-image" />
+  </div>
+
   <div class="artist-info">
     <div class="primary-label">
-      <a href="#">
+      <a href="#"
+         class="artist-link">
         <span>{{artist.name}}</span>
       </a>
     </div>
