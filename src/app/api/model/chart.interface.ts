@@ -3,5 +3,5 @@ export interface IChart {
   name: string;
   img: string;
   type: string;
-  preview?: string;
+  tracklist?: string;
 }

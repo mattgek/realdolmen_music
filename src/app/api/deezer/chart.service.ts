@@ -6,7 +6,9 @@ import { IChartService } from '../interface';
 import { IChart } from '../model';
 import { IChartDto } from './model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ChartService implements IChartService {
   constructor(private jsonP: Jsonp) {}
 
@@ -22,7 +24,8 @@ export class ChartService implements IChartService {
               type: 'album',
               id: album.id,
               img: album.cover_medium,
-              name: album.title
+              name: album.title,
+              tracklist: album.tracklist
             });
           });
           chart.artists.data.forEach(artist => {
@@ -30,7 +33,8 @@ export class ChartService implements IChartService {
               type: 'artist',
               id: artist.id,
               img: artist.picture_medium,
-              name: artist.name
+              name: artist.name,
+              tracklist: artist.tracklist
             });
           });
           chart.playlists.data.forEach(playlist => {
@@ -38,7 +42,8 @@ export class ChartService implements IChartService {
               type: 'playlist',
               id: playlist.id,
               img: playlist.picture_medium,
-              name: playlist.title
+              name: playlist.title,
+              tracklist: playlist.tracklist
             });
           });
           chart.tracks.data.forEach(track => {
@@ -47,7 +52,7 @@ export class ChartService implements IChartService {
               id: track.id,
               img: track.album.cover_medium,
               name: track.title,
-              preview: track.preview
+              tracklist: track.preview
             });
           });
           return result;

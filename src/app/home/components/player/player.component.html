@@ -32,7 +32,7 @@
       <ng-container *ngIf="(audioPlaying$ | async) as currentSong; else noSong">
         <div class="track-header">
           <div class="track-title">
-            {{currentSong.name}}
+            {{currentSong.title}} • {{currentSong.artist.name}}
           </div>
           <div class="track-actions">
             <button class="btn icon-btn">
@@ -97,7 +97,8 @@
           </div>
         </figure>
         <div *ngIf="selectedTrackList$ | async"
-             class="queuelist-label">Queue</div>
+             class="queuelist-label">
+          Queue</div>
       </button>
     </div>
   </div>

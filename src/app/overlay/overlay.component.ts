@@ -18,7 +18,7 @@ export class OverlayComponent {
 
   play() {
     if (this.item) {
-      this.musicService.selectTrack(this.item);
+      this.musicService.selectedTracklist(this.item);
     }
   }
 }

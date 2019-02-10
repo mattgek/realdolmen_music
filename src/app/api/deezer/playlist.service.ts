@@ -5,8 +5,12 @@ import { map } from 'rxjs/operators';
 import { IPlaylistService } from '../interface';
 import { IPlaylist } from '../model';
 import { IPlaylistDto } from './model/playlist.dto';
+import { ITrackDto } from './model/track.dto';
+import { ITracksDto } from './model/tracks.dto';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PlaylistService implements IPlaylistService {
   constructor(private jsonP: Jsonp) {}
 
@@ -15,8 +19,6 @@ export class PlaylistService implements IPlaylistService {
       .get(`https://api.deezer.com/playlist/${id}?output=jsonp&callback=JSONP_CALLBACK&q=`)
       .pipe(
         map(response => {
-          console.log(response);
-
           const playlist: IPlaylistDto = response.json();
           return playlist.tracks.data.map(track => {
             return {
@@ -27,5 +29,16 @@ export class PlaylistService implements IPlaylistService {
           });
         })
       );
+  }
+
+  getPlaylistTracks(url: string): Observable<ITrackDto[]> {
+    return this.jsonP.get(`${url}?output=jsonp&callback=JSONP_CALLBACK&q=`).pipe(
+      map(response => {
+        const playlist: ITracksDto = response.json();
+        return playlist.data.map(track => {
+          return track;
+        });
+      })
+    );
   }
 }

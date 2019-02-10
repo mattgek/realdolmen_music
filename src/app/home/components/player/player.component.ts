@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import {
   faPause,
@@ -11,9 +11,9 @@ import {
   faVolumeMute,
   faVolumeUp
 } from '@fortawesome/free-solid-svg-icons';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, map, tap } from 'rxjs/operators';
-import { IChart } from 'src/app/api';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { ITrackDto } from 'src/app/api/deezer/model/track.dto';
 import { MusicService } from './service';
 
 @Component({
@@ -21,7 +21,8 @@ import { MusicService } from './service';
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent implements OnInit, OnDestroy {
+  //#region Icons
   previousIcon = faStepBackward;
   playIcon = faPlay;
   nextIcon = faStepForward;
@@ -32,6 +33,7 @@ export class PlayerComponent implements OnInit {
   volumeOnIcon = faVolumeUp;
   muteIcon = faVolumeMute;
   audioSettingsIcon = faSlidersH;
+  //#endregion
 
   isPlaying: boolean;
   noNext: boolean = true;
@@ -43,39 +45,40 @@ export class PlayerComponent implements OnInit {
   currentSongTime: number = 0;
   maxTime: number;
   minTime: number = 0;
-  currentPlayingIndex: number;
+  currentPlayingIndex: number = 0;
 
-  audioEnded$: Observable<Event>;
-  audioTimeUpdate$: Observable<Event>;
-  audioPlaying$: BehaviorSubject<IChart>;
-  selectedTrackList$: Observable<IChart[]>;
-
-  @ViewChild('active') activePosition: ElementRef;
+  audioPlaying$: Subject<ITrackDto>;
+  queueList$: Observable<ITrackDto[]>;
+  selectedTrackList$: Observable<ITrackDto[]>;
+  private nextSub: Subscription;
+  private previousSub: Subscription;
 
   constructor(private musicService: MusicService) {}
 
   ngOnInit() {
-    this.audioPlaying$ = new BehaviorSubject<IChart>(undefined);
+    this.audioPlaying$ = new Subject<ITrackDto>();
     this.musicService.audio.onended = this.handleAudioEnded.bind(this);
     this.musicService.audio.ontimeupdate = this.handleTimeUpdate.bind(this);
     this.musicService.audio.onplay = this.handleOnPlaying.bind(this);
 
-    this.selectedTrackList$ = this.musicService.getCurrentTrackList().pipe(
-      distinctUntilChanged(),
-      tap(tracks => {
-        if (tracks) {
-          this.musicService.play(tracks[0]);
-          this.currentPlayingIndex = 0;
-          this.audioPlaying$.next(tracks[0]);
+    this.selectedTrackList$ = this.musicService.getCurrentTrackList().pipe(distinctUntilChanged());
+    this.queueList$ = this.selectedTrackList$;
 
-          if (tracks.length > 1) {
-            this.noNext = false;
-          }
+    this.queueList$.subscribe(tracks => {
+      if (tracks && this.currentPlayingIndex === 0) {
+        this.musicService.play(tracks[0]);
+        this.audioPlaying$.next(tracks[0]);
+
+        if (tracks.length > 1) {
+          this.noNext = false;
         }
-        return tracks;
-      }),
-      map(tracks => tracks)
-    );
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.nextSub.unsubscribe();
+    this.previousSub.unsubscribe();
   }
 
   handleOnPlaying(e: this): any {
@@ -108,11 +111,11 @@ export class PlayerComponent implements OnInit {
   }
 
   next() {
-    this.selectedTrackList$.subscribe(tracks => {
+    this.nextSub = this.queueList$.subscribe(tracks => {
       if (tracks.indexOf(tracks[this.currentPlayingIndex + 1]) > -1) {
         this.currentPlayingIndex++;
         this.musicService.play(tracks[this.currentPlayingIndex]);
-        this.musicService.audio.currentTime = 0;
+        this.audioPlaying$.next(tracks[this.currentPlayingIndex]);
         this.noPrevious = false;
       } else {
         this.noNext = true;
@@ -121,11 +124,11 @@ export class PlayerComponent implements OnInit {
   }
 
   previous() {
-    this.selectedTrackList$.subscribe(tracks => {
+    this.previousSub = this.queueList$.subscribe(tracks => {
       if (tracks.indexOf(tracks[this.currentPlayingIndex - 1]) > -1) {
         this.currentPlayingIndex--;
         this.musicService.play(tracks[this.currentPlayingIndex]);
-        this.musicService.audio.currentTime = 0;
+        this.audioPlaying$.next(tracks[this.currentPlayingIndex]);
         this.noNext = false;
       }
     });
