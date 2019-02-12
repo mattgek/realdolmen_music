@@ -8,17 +8,18 @@
                size="lg"></fa-icon>
     </button>
     <button class="btn icon-btn"
-            *ngIf="!isPlaying"
+            *ngIf="!(isPlaying$ | async); else pauseBtn;"
             (click)="play()">
       <fa-icon [icon]="playIcon"
                size="lg"></fa-icon>
     </button>
-    <button class="btn icon-btn"
-            *ngIf="isPlaying"
-            (click)="pause()">
-      <fa-icon [icon]="pauseIcon"
-               size="lg"></fa-icon>
-    </button>
+    <ng-template #pauseBtn>
+      <button class="btn icon-btn"
+              (click)="pause()">
+        <fa-icon [icon]="pauseIcon"
+                 size="lg"></fa-icon>ss
+      </button>
+    </ng-template>
     <button class="btn icon-btn"
             [disabled]="noNext"
             [ngClass]="{'btn-diabled': noNext}"
@@ -55,7 +56,7 @@
                    type="range"
                    step="1"
                    min="{{minTime}}"
-                   max="{{maxTime}}"
+                   [max]="maxTime$ | async"
                    value="{{currentSongTime}}">
           </div>
           <div class="track-slider-counter slider-counter-max">{{maxSongTime}}</div>
@@ -98,7 +99,8 @@
             </div>
           </figure>
           <div class="queuelist-label">
-            Queue</div>
+            Queue
+          </div>
         </button>
       </div>
 
