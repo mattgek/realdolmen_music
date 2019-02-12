@@ -11,8 +11,8 @@ import {
   faVolumeMute,
   faVolumeUp
 } from '@fortawesome/free-solid-svg-icons';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, take } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, fromEvent, Observable } from 'rxjs';
+import { distinctUntilChanged, map, scan, shareReplay, tap } from 'rxjs/operators';
 import { ITrackDto } from 'src/app/api/deezer/model/track.dto';
 import { MusicService } from './service';
 
@@ -45,54 +45,42 @@ export class PlayerComponent implements OnInit, OnDestroy {
   currentSongTime: number = 0;
   maxTime: number;
   minTime: number = 0;
-  currentPlayingIndex: number;
+  currentPlayingIndex$: BehaviorSubject<number>;
 
-  audioPlaying$: Subject<ITrackDto>;
-  selectedTrackList$: Observable<ITrackDto[]>;
   queueList$: Observable<ITrackDto[]>;
-  private nextSub: Subscription;
-  private previousSub: Subscription;
-  private selectedTrackListSub: Subscription;
+  audioPlaying$: Observable<ITrackDto>;
 
   constructor(private musicService: MusicService) {}
 
   ngOnInit() {
-    this.audioPlaying$ = new Subject<ITrackDto>();
-    this.musicService.audio.onended = this.handleAudioEnded.bind(this);
-    this.musicService.audio.ontimeupdate = this.handleTimeUpdate.bind(this);
-    this.musicService.audio.onplay = this.handleOnPlaying.bind(this);
+    this.currentPlayingIndex$ = new BehaviorSubject<number>(0);
 
-    this.queueList$ = this.musicService.getCurrentTrackList().pipe(distinctUntilChanged());
-    this.selectedTrackList$ = this.queueList$;
+    this.registerAudioEvents();
 
-    this.selectedTrackListSub = this.selectedTrackList$.subscribe(tracks => {
-      this.currentPlayingIndex = 0;
-      if (tracks) {
-        this.musicService.play(tracks[0]);
-        this.audioPlaying$.next(tracks[0]);
-
-        if (tracks.length > 1) {
-          this.noNext = false;
+    this.queueList$ = this.musicService.getCurrentTrackList().pipe(
+      distinctUntilChanged(),
+      tap(tracks => {
+        if (tracks && tracks.length > 1) {
+          if (tracks.length > 1) {
+            this.noNext = false;
+          }
         }
-      }
-    });
+      }),
+      shareReplay(1)
+    );
+
+    this.musicProcessPlayer();
   }
 
-  ngOnDestroy() {
-    this.nextSub.unsubscribe();
-    this.previousSub.unsubscribe();
-    this.selectedTrackListSub.unsubscribe();
-  }
-
-  handleOnPlaying(e: this): any {
+  handleOnPlaying() {
     this.isPlaying = true;
   }
-  handleAudioEnded(e: this): any {
+  handleAudioEnded() {
     this.isPlaying = false;
     this.next();
   }
 
-  handleTimeUpdate(e: this): any {
+  handleTimeUpdate() {
     const elapsed = this.musicService.audio.currentTime;
     this.maxTime = this.musicService.audio.duration;
     this.currentSongTime = elapsed / this.maxTime;
@@ -115,38 +103,49 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   next() {
-    this.nextSub = this.selectedTrackList$.pipe(take(1)).subscribe(tracks => {
-      if (tracks.indexOf(tracks[this.currentPlayingIndex + 1]) > -1) {
-        this.currentPlayingIndex++;
-
-        if (tracks[this.currentPlayingIndex].preview) {
-          this.musicService.play(tracks[this.currentPlayingIndex]);
-          this.audioPlaying$.next(tracks[this.currentPlayingIndex]);
-        } else {
-          this.next();
-        }
-        this.noPrevious = false;
-      } else {
-        this.noNext = true;
-      }
-    });
+    this.currentPlayingIndex$.next(1);
   }
 
   previous() {
-    this.previousSub = this.selectedTrackList$.pipe(take(1)).subscribe(tracks => {
-      if (tracks.indexOf(tracks[this.currentPlayingIndex - 1]) > -1) {
-        this.currentPlayingIndex--;
+    this.currentPlayingIndex$.next(-1);
+  }
 
-        if (tracks[this.currentPlayingIndex].preview) {
-          this.musicService.play(tracks[this.currentPlayingIndex]);
-          this.audioPlaying$.next(tracks[this.currentPlayingIndex]);
+  private musicProcessPlayer() {
+    const currenIndexScanner$ = this.currentPlayingIndex$.pipe(
+      scan((acc, current) => {
+        return acc + current;
+      }, 0)
+    );
+
+    this.audioPlaying$ = combineLatest(this.queueList$, currenIndexScanner$).pipe(
+      map(([tracks, index]) => {
+        let playingTrack: ITrackDto;
+        if (tracks.indexOf(tracks[index]) > -1) {
+          if (tracks[index].preview) {
+            this.musicService.play(tracks[index]);
+            playingTrack = tracks[index];
+          } else {
+            // or previous or next
+          }
+
+          return playingTrack;
+          // show previous button or next button
         } else {
-          this.previous();
+          // hide previous or next button
+          return playingTrack;
         }
-        this.noNext = false;
-      } else {
-        this.noPrevious = true;
-      }
-    });
+      })
+    );
+  }
+
+  private registerAudioEvents() {
+    const audioEnded$ = fromEvent(this.musicService.audio, 'ended');
+    const audioPlay$ = fromEvent(this.musicService.audio, 'play');
+    const audioTimeUpdate$ = fromEvent(this.musicService.audio, 'timeupdate');
+
+    // TODO: fix subscriptions herev potential memory leaks
+    audioPlay$.subscribe(() => this.handleOnPlaying());
+    audioTimeUpdate$.subscribe(() => this.handleTimeUpdate());
+    audioEnded$.subscribe(() => this.handleAudioEnded());
   }
 }

@@ -29,10 +29,10 @@
   </div>
   <div class="player-track">
     <div class="track-container">
-      <ng-container *ngIf="(audioPlaying$ | async) as currentSong; else noSong">
+      <ng-container *ngIf="(audioPlaying$ | async) as currentPlayingSong; else noSong">
         <div class="track-header">
           <div class="track-title">
-            {{currentSong.title}} • {{currentSong.artist.name}}
+            {{currentPlayingSong.title}} • {{currentPlayingSong.artist.name}}
           </div>
           <div class="track-actions">
             <button class="btn icon-btn">
@@ -84,7 +84,7 @@
                  size="1x"></fa-icon>
       </button>
     </div>
-    <ng-container *ngIf="queueList$ | async">
+    <ng-container *ngIf="selectedTrackList$| async">
       <div class="divider"></div>
       <div class="queue-list">
         <button class="btn icon-btn queue-list-btn"

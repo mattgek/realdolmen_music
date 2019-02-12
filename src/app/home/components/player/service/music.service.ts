@@ -1,5 +1,6 @@
-import { Inject, Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { Inject, Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import {
   ALBUM_SERVICE,
   ARTIST_SERVICE,
@@ -16,14 +17,9 @@ import { ITrackDto } from 'src/app/api/deezer/model/track.dto';
 @Injectable({
   providedIn: 'root'
 })
-export class MusicService implements OnDestroy {
+export class MusicService {
   audio: HTMLAudioElement;
-  currentTracks: Subject<ITrackDto[]>;
-
-  private playlistTrackSub: Subscription;
-  private albumTracksSub: Subscription;
-  private trackSub: Subscription;
-  private artistTracksSub: Subscription;
+  currentTracks: Subject<IChart>;
 
   constructor(
     @Inject(PLAYLIST_SERVICE) private playlistService: IPlaylistService,
@@ -32,14 +28,7 @@ export class MusicService implements OnDestroy {
     @Inject(ARTIST_SERVICE) private artistService: IArtistService
   ) {
     this.audio = new Audio();
-    this.currentTracks = new BehaviorSubject<ITrackDto[]>(undefined);
-  }
-
-  ngOnDestroy() {
-    this.playlistTrackSub.unsubscribe();
-    this.albumTracksSub.unsubscribe();
-    this.trackSub.unsubscribe();
-    this.artistTracksSub.unsubscribe();
+    this.currentTracks = new Subject<IChart>();
   }
 
   load(url: string) {
@@ -47,38 +36,33 @@ export class MusicService implements OnDestroy {
     this.audio.load();
   }
 
-  selectedTracklist(track: IChart) {
-    switch (track.type) {
-      case 'song':
-        this.trackSub = this.trackService
-          .getTrack(track.id)
-          .subscribe(trk => this.currentTracks.next([trk]));
-        break;
-      case 'album':
-        this.albumTracksSub = this.albumService
-          .getAlbumTracks(track.tracklist)
-          .subscribe(tracks => this.currentTracks.next(tracks));
-        break;
-      case 'artist':
-        this.artistTracksSub = this.artistService
-          .getArtistTracks(track.tracklist)
-          .subscribe(tracks => this.currentTracks.next(tracks));
-        break;
-      case 'playlist':
-        this.playlistTrackSub = this.playlistService
-          .getPlaylistTracks(track.tracklist)
-          .subscribe(tracks => this.currentTracks.next(tracks));
-        break;
-    }
-  }
-
   play(track: ITrackDto) {
     this.load(track.preview);
     this.audio.play();
   }
 
+  selectedTracklist(track: IChart) {
+    // TODO: this should not be. stream is
+    this.currentTracks.next(track);
+  }
+
   getCurrentTrackList(): Observable<ITrackDto[]> {
-    return this.currentTracks;
+    return this.currentTracks.pipe(
+      switchMap(trk => {
+        switch (trk.type) {
+          case 'song':
+            return this.trackService.getTrack(trk.id).pipe(map(t => [t]));
+          case 'album':
+            return this.albumService.getAlbumTracks(trk.tracklist);
+          case 'artist':
+            return this.artistService.getArtistTracks(trk.tracklist);
+          case 'playlist':
+            return this.playlistService.getPlaylistTracks(trk.tracklist);
+          default:
+            return [];
+        }
+      })
+    );
   }
 
   randomTrack(tracks) {
