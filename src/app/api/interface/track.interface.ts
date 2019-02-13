@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
-import { ITrackDto } from '../deezer/model/track.dto';
+import { ITrack } from '../model';
 
 export interface ITrackService {
-  getTrack(id: number): Observable<ITrackDto>;
+  getTrack(id: number): Observable<ITrack>;
 }

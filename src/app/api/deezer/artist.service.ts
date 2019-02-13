@@ -3,15 +3,13 @@ import { Jsonp } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IArtistService } from '../interface';
-import { IArtistDto } from './model/artist.dto';
-import { ITrackDto } from './model/track.dto';
-import { ITracksDto } from './model/tracks.dto';
+import { IArtist, ITrack, ITracks } from '../model';
 
 @Injectable()
 export class ArtistService implements IArtistService {
   constructor(private jsonP: Jsonp) {}
 
-  getArtist(id: number): Observable<IArtistDto> {
+  getArtist(id: number): Observable<IArtist> {
     return this.jsonP
       .get(`https://api.deezer.com/artist/${id}?output=jsonp&callback=JSONP_CALLBACK&q=`)
       .pipe(
@@ -21,10 +19,10 @@ export class ArtistService implements IArtistService {
       );
   }
 
-  getArtistTracks(url: string): Observable<ITrackDto[]> {
+  getArtistTracks(url: string): Observable<ITrack[]> {
     return this.jsonP.get(`${url}&output=jsonp&callback=JSONP_CALLBACK&q=`).pipe(
       map(response => {
-        const artist: ITracksDto = response.json();
+        const artist: ITracks = response.json();
         return artist.data.map(track => {
           return track;
         });

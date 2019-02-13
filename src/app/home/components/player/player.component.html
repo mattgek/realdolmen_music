@@ -47,26 +47,27 @@
           </div>
         </div>
         <div class="track-play-info">
-          <div class="track-slider-counter slider-counter-current">{{minSongTime}}</div>
+          <div class="track-slider-counter slider-counter-current">{{minSongTime$ | async}}</div>
           <div class="player-bar">
             <div class="slider-track-default"></div>
-            <div [style.width.%]="currentSongTime * 100"
+            <div [style.width.%]="(currentSongTime$ | async) * 100"
                  class="slider-track-active"></div>
             <input class="slider-track-input mousetrap"
                    type="range"
                    step="1"
-                   min="{{minTime}}"
+                   [min]="minTime"
                    [max]="maxTime$ | async"
-                   value="{{currentSongTime}}">
+                   [value]="currentSongTime$ | async">
           </div>
-          <div class="track-slider-counter slider-counter-max">{{maxSongTime}}</div>
+          <div class="track-slider-counter slider-counter-max">{{maxSongTime$ | async}}</div>
         </div>
       </ng-container>
     </div>
   </div>
   <div class="player-options">
     <div class="player-options-actions">
-      <button class="btn icon-btn">
+      <button class="btn icon-btn"
+              (click)="shuffle()">
         <fa-icon [icon]="shuffleIcon"
                  size="1x"></fa-icon>
       </button>
@@ -85,7 +86,7 @@
                  size="1x"></fa-icon>
       </button>
     </div>
-    <ng-container *ngIf="selectedTrackList$| async">
+    <ng-container *ngIf="(queueList$| async) as queueList">
       <div class="divider"></div>
       <div class="queue-list">
         <button class="btn icon-btn queue-list-btn"
@@ -103,7 +104,6 @@
           </div>
         </button>
       </div>
-
     </ng-container>
   </div>
 </div>

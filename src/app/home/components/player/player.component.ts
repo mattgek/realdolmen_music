@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { BehaviorSubject, combineLatest, fromEvent, merge, Observable, Subject } from 'rxjs';
 import {
+  delay,
   distinctUntilChanged,
   filter,
   map,
@@ -22,7 +23,7 @@ import {
   startWith,
   tap
 } from 'rxjs/operators';
-import { ITrackDto } from 'src/app/api/deezer/model/track.dto';
+import { ITrack } from 'src/app/api';
 import { MusicService } from './service';
 
 @Component({
@@ -44,22 +45,21 @@ export class PlayerComponent implements OnInit {
   audioSettingsIcon = faSlidersH;
   //#endregion
 
-  isPlaying: boolean;
   isPlaying$: Observable<boolean>;
   noNext: boolean = true;
   noPrevious: boolean = true;
   isMuted: boolean;
 
-  minSongTime: string;
-  maxSongTime: string;
-  currentSongTime: number = 0;
-  maxTime: number;
+  minSongTime$: Observable<string>;
+  maxSongTime$: Observable<string>;
   maxTime$: Observable<number>;
+  elapsed$: Observable<number>;
+  currentSongTime$: Observable<number>;
   minTime: number = 0;
   currentPlayingIndex$: Subject<{ [key: string]: string | number }>;
 
-  queueList$: Observable<ITrackDto[]>;
-  audioPlaying$: Observable<ITrackDto>;
+  queueList$: Observable<ITrack[]>;
+  audioPlaying$: Observable<ITrack>;
 
   play$ = new Subject();
   pause$ = new Subject();
@@ -87,44 +87,18 @@ export class PlayerComponent implements OnInit {
     );
 
     this.musicProcessPlayer();
-
-    const update$ = fromEvent(this.musicService.audio, 'timeupdate');
-
-    this.maxTime$ = update$.pipe(
-      map(_ => this.musicService.audio.duration),
-      filter(x => !Number.isNaN(x))
-    );
-    const audioEnded$ = fromEvent(this.musicService.audio, 'ended').pipe(mapTo(false));
-    const audioPlay$ = fromEvent(this.musicService.audio, 'play').pipe(mapTo(true));
-    const onPause$ = this.pause$.pipe(mapTo(false));
-    const onPlay$ = this.play$.pipe(mapTo(true));
-    this.isPlaying$ = merge(audioEnded$, audioPlay$, onPause$, onPlay$).pipe(startWith(false));
   }
 
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
   }
 
-  handleOnPlaying() {
-    this.isPlaying = true;
-  }
-  handleAudioEnded() {
-    this.isPlaying = false;
-    this.next();
-  }
-
-  handleTimeUpdate() {
-    // TODO: cleanup
-    const elapsed = this.musicService.audio.currentTime;
-    this.maxTime = this.musicService.audio.duration;
-    this.currentSongTime = elapsed / this.maxTime;
-    this.minSongTime = this.musicService.formatTime(elapsed);
-    this.maxSongTime = this.musicService.formatTime(this.maxTime);
-  }
+  // handleAudioEnded() {
+  //   this.next();
+  // }
 
   play() {
     if (this.musicService.audio.paused && this.musicService.audio.src) {
-      this.isPlaying = true;
       this.play$.next();
       this.musicService.audio.play();
     }
@@ -132,7 +106,6 @@ export class PlayerComponent implements OnInit {
 
   pause() {
     if (!this.musicService.audio.paused) {
-      this.isPlaying = false;
       this.pause$.next();
       this.musicService.audio.pause();
     }
@@ -144,6 +117,9 @@ export class PlayerComponent implements OnInit {
 
   previous() {
     this.currentPlayingIndex$.next({ state: 'previous', i: -1 });
+  }
+  shuffle() {
+    // TODO: implement shgffle
   }
 
   private musicProcessPlayer() {
@@ -172,19 +148,21 @@ export class PlayerComponent implements OnInit {
 
     this.audioPlaying$ = combineLatest(this.queueList$, currenIndexScanner$).pipe(
       map(([tracks, currentState]) => {
-        let playingTrack: ITrackDto;
+        let playingTrack: ITrack;
 
-        if (tracks.indexOf(tracks[currentState.i]) > -1) {
-          if (tracks[currentState.i].preview) {
-            this.musicService.play(tracks[currentState.i]);
-            playingTrack = tracks[currentState.i];
+        const currentIndx = tracks.indexOf(tracks[currentState.i]);
+
+        if (currentIndx > -1) {
+          if (tracks[currentIndx].preview) {
+            this.musicService.play(tracks[currentIndx]);
+            playingTrack = tracks[currentIndx];
           } else {
             this.noMp3AudioHandler(currentState.state);
           }
-          this.previousNextBtnHandler(currentState.state, false);
+          this.previousNextBtnHandler(currentState.state, currentIndx);
           return playingTrack;
         } else {
-          this.previousNextBtnHandler(currentState.state, true, true);
+          this.previousNextBtnHandler(currentState.state, currentIndx);
           return playingTrack;
         }
       })
@@ -199,16 +177,11 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  // TODO: make this better
-  private previousNextBtnHandler(
-    actionState: string,
-    buttonState: boolean,
-    noTrack: boolean = false
-  ) {
+  private previousNextBtnHandler(actionState: string, index: number) {
     if (actionState === 'next') {
-      noTrack ? (this.noNext = true) : (this.noPrevious = buttonState);
+      index > -1 ? (this.noPrevious = false) : (this.noNext = true);
     } else if (actionState === 'previous') {
-      noTrack ? (this.noPrevious = true) : (this.noNext = buttonState);
+      index > -1 ? (this.noNext = false) : (this.noPrevious = true);
     }
   }
 
@@ -219,7 +192,24 @@ export class PlayerComponent implements OnInit {
       map(_ => this.musicService.audio.duration),
       filter(x => !Number.isNaN(x))
     );
-    const audioEnded$ = fromEvent(this.musicService.audio, 'ended').pipe(mapTo(false));
+
+    this.elapsed$ = update$.pipe(
+      map(_ => this.musicService.audio.currentTime),
+      filter(x => !Number.isNaN(x))
+    );
+
+    this.currentSongTime$ = combineLatest(this.elapsed$, this.maxTime$).pipe(
+      map(([elapsed, maxTime]) => elapsed / maxTime)
+    );
+
+    this.minSongTime$ = this.elapsed$.pipe(map(elapsed => this.musicService.formatTime(elapsed)));
+    this.maxSongTime$ = this.maxTime$.pipe(map(maxTime => this.musicService.formatTime(maxTime)));
+
+    const audioEnded$ = fromEvent(this.musicService.audio, 'ended').pipe(
+      mapTo(false),
+      delay(1000),
+      tap(_ => this.next())
+    );
     const audioPlay$ = fromEvent(this.musicService.audio, 'play').pipe(mapTo(true));
     const onPause$ = this.pause$.pipe(mapTo(false));
     const onPlay$ = this.play$.pipe(mapTo(true));

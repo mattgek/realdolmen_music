@@ -1,8 +1,7 @@
 import { Observable } from 'rxjs';
-import { ITrackDto } from '../deezer/model/track.dto';
-import { IPlaylist } from '../model';
+import { IPlaylist, ITrack } from '../model';
 
 export interface IPlaylistService {
-  getPlaylist(id: string): Observable<IPlaylist[]>;
-  getPlaylistTracks(url: string): Observable<ITrackDto[]>;
+  getPlaylist(id: string): Observable<IPlaylist>;
+  getPlaylistTracks(url: string): Observable<ITrack[]>;
 }

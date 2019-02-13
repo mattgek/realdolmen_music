@@ -22,7 +22,7 @@ export class ChartService implements IChartService {
               type: 'album',
               id: album.id,
               img: album.cover_medium,
-              name: album.title,
+              title: album.title,
               tracklist: album.tracklist,
               artist: album.artist.name
             });
@@ -42,7 +42,7 @@ export class ChartService implements IChartService {
               type: 'playlist',
               id: playlist.id,
               img: playlist.picture_medium,
-              name: playlist.title,
+              title: playlist.title,
               tracklist: playlist.tracklist,
               totalTracks: playlist.nb_tracks
             });
@@ -52,7 +52,7 @@ export class ChartService implements IChartService {
               type: 'song',
               id: track.id,
               img: track.album.cover_medium,
-              name: track.title,
+              title: track.title,
               tracklist: track.preview,
               artist: track.artist.name
             });

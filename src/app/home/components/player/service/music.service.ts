@@ -8,11 +8,11 @@ import {
   IArtistService,
   IChart,
   IPlaylistService,
+  ITrack,
   ITrackService,
   PLAYLIST_SERVICE,
   TRACK_SERVICE
 } from 'src/app/api';
-import { ITrackDto } from 'src/app/api/deezer/model/track.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,7 @@ export class MusicService {
     this.audio.load();
   }
 
-  play(track: ITrackDto) {
+  play(track: ITrack) {
     this.load(track.preview);
     this.audio.play();
   }
@@ -46,7 +46,7 @@ export class MusicService {
     this.currentTracks.next(track);
   }
 
-  getCurrentTrackList(): Observable<ITrackDto[]> {
+  getCurrentTrackList(): Observable<ITrack[]> {
     return this.currentTracks.pipe(
       switchMap(trk => {
         switch (trk.type) {
@@ -65,12 +65,12 @@ export class MusicService {
     );
   }
 
+  // TODO: random tracks
   randomTrack(tracks) {
-    const trackLength = tracks.length;
-    // Pick a random number
-    const randomNumber = Math.floor(Math.random() * trackLength + 1);
-    // Return a random track
-    return tracks[randomNumber];
+    // const trackLength = tracks.length;
+    // // Pick a random number
+    // const randomNumber = Math.floor(Math.random() * trackLength + 1);
+    // // Return a random track
   }
 
   formatTime(seconds): string {
