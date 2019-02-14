@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { OverlayComponent } from './overlay.component';
 import { OverlayDirective } from './overlay.directive';
 
 @NgModule({
-  declarations: [OverlayDirective],
-  imports: [CommonModule],
-  exports: [OverlayDirective]
+  declarations: [OverlayDirective, OverlayComponent],
+  imports: [CommonModule, FontAwesomeModule],
+  exports: [OverlayDirective, OverlayComponent]
   // providers: [
   //   {
   //     provide: COMPONENT_TYPE,

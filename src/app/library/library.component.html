@@ -6,9 +6,13 @@
 </div>
 <app-tabs>
   <app-tab label="playlists">
-    <app-album-card albumCoverUrl="https://www.gstatic.com/youtube/media/ytm/images/pbg/create-playlist-@210.png"
-                    albumTitle="Playlist"
-                    (click)="openDialog()"></app-album-card>
+    <app-round-card (click)="openDialog()">
+      <img cover
+           class="cover-img"
+           src="https://www.gstatic.com/youtube/media/ytm/images/pbg/create-playlist-@210.png">
+      <div class="primary-label"
+           detail>Add Playlist</div>
+    </app-round-card>
     <!-- <app-playlists></app-playlists> -->
   </app-tab>
   <app-tab label="albums">

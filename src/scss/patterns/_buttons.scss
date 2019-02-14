@@ -10,14 +10,33 @@ $button-primary-color: #065fd4;
   color: $button-text-color;
   height: 36px;
   border-radius: 2px;
-  min-width: 88px;
+  width: 88px;
   border: none;
 
-  &.btn-transparent {
-    background-color: transparent;
+  &:focus {
+    border: none;
+    outline: none;
   }
+}
+.btn-transparent {
+  background-color: transparent;
+}
+.btn-diabled {
+  cursor: default;
+  opacity: 0.3;
+}
 
-  &.btn-primary {
-    background-color: $button-primary-color;
-  }
+.btn-primary {
+  background-color: $button-primary-color;
+}
+
+.icon-btn {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  color: #32323d;
+  overflow: hidden;
+  width: 36px;
+  padding: 0.5em;
+  transition-duration: 0.15s;
+  transition-property: background-color;
 }

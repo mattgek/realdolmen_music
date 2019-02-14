@@ -1,19 +1,24 @@
 <div class="artist-container">
-  <a href="#"
-     class="artist-link">
-    <div class="artist-cover">
-      <img [src]="artistUrl"
-           alt="artist-image" />
-    </div>
-  </a>
+
+  <div class="artist-cover"
+       appOverlay
+       (toggleOverlay)="toggleOverlay($event)">
+    <ng-container *ngIf="show">
+      <app-overlay [item]="artist"></app-overlay>
+    </ng-container>
+    <img [src]="artist.picture_medium"
+         alt="artist-image" />
+  </div>
+
   <div class="artist-info">
     <div class="primary-label">
-      <a href="#">
-        <span>{{artistName}}</span>
+      <a href="#"
+         class="artist-link">
+        <span>{{artist.name}}</span>
       </a>
     </div>
     <div class="secondary-label">
-      <span>{{followers | readableNumber}} followers</span>
+      <span>{{artist.nb_fan | readableNumber}} followers</span>
     </div>
   </div>
 </div>

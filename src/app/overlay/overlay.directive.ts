@@ -5,9 +5,12 @@ import { fromEvent } from 'rxjs';
   selector: '[appOverlay]'
 })
 export class OverlayDirective implements OnInit {
-  @Output() toggleHover = new EventEmitter();
+  // componentRef: ComponentRef<OverlayComponent>;
+  @Output() toggleOverlay = new EventEmitter();
 
-  constructor(private el: ElementRef) {} // @Inject(COMPONENT_TYPE) private host: SquareCardComponent) {}
+  constructor(
+    private el: ElementRef // private viewContainer: ViewContainerRef, // private resolver: ComponentFactoryResolver
+  ) {} // @Inject(COMPONENT_TYPE) private host: SquareCardComponent) {}
 
   // @HostListener('mouseenter')
   // onMouseEnter() {
@@ -21,11 +24,28 @@ export class OverlayDirective implements OnInit {
 
   ngOnInit() {
     fromEvent(this.el.nativeElement, 'mouseenter').subscribe(() => {
-      this.toggleHover.emit(true);
+      this.toggleOverlay.emit(true);
+      // this.createComponent();
     });
 
     fromEvent(this.el.nativeElement, 'mouseleave').subscribe(() => {
-      this.toggleHover.emit(false);
+      this.toggleOverlay.emit(false);
+      // this.destroyComponent();
     });
   }
+
+  // private createComponent() {
+  //   this.viewContainer.clear();
+
+  //   // create factory for component creation
+  //   const factory: ComponentFactory<OverlayComponent> = this.resolver.resolveComponentFactory(
+  //     OverlayComponent
+  //   );
+
+  //   this.componentRef = this.viewContainer.createComponent(factory);
+  // }
+
+  // private destroyComponent() {
+  //   this.componentRef.instance.
+  // }
 }

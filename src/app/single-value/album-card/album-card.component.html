@@ -1,17 +1,24 @@
-<app-square-card>
+<app-square-card [item]="item">
   <ng-container cover>
-    <a class="album-cover-link">
-      <img [src]="albumCoverUrl"
+    <a href="#"
+       class="album-cover-link">
+      <img [src]="item.img"
            alt="album-cover-image" />
     </a>
   </ng-container>
   <ng-container detail>
     <div class="primary-label">
-      <span>{{albumTitle}}</span>
+      <span>{{item.title}}</span>
     </div>
-    <div class="secondary-label"
-         *ngIf="albumType">
-      <span>{{albumType}} <span *ngIf="additionalInfo">• {{additionalInfo}}</span> </span>
+    <div class="secondary-label">
+      <span>{{item.type}} •
+        <ng-container *ngIf="item.artist">
+          {{item.artist}}
+        </ng-container>
+        <ng-container *ngIf="item.totalTracks">
+          {{item.totalTracks}} Songs
+        </ng-container>
+      </span>
     </div>
   </ng-container>
 </app-square-card>

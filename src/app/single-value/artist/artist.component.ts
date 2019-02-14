@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IArtistDto } from 'src/app/api/deezer/model/artist.dto';
 
 @Component({
   selector: 'app-artist',
@@ -6,12 +7,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./artist.component.scss']
 })
 export class ArtistComponent {
-  @Input()
-  artistUrl: string;
+  show: boolean;
 
-  @Input()
-  artistName: string;
+  @Input() artist: IArtistDto;
 
-  @Input()
-  followers: number;
+  toggleOverlay(state: boolean) {
+    this.show = state;
+  }
 }

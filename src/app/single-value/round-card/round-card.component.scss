@@ -1,6 +1,8 @@
 @import '../../../scss/variables/_index';
 
 $album-card-max-width: 190px;
+$color-primary: $color-text-primary;
+$color-secondary: $color-text-secondary;
 
 // TODO
 .round-card-container {
@@ -8,9 +10,11 @@ $album-card-max-width: 190px;
   margin-right: 24px;
 
   .round-cover {
+    border-radius: 100px;
     overflow: hidden;
-    border-radius: 50%;
-    display: flex;
+    width: 200px;
+    height: 200px;
+    position: relative;
   }
 
   .round-detail {

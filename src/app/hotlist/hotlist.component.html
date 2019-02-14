@@ -1,4 +1,6 @@
-<ng-container *ngFor="let item of tracks$ | async">
-  <!-- <app-song *ngSwitchCase="'song'"></app-song> -->
-  <app-album-card [albumCoverUrl]="item.img" [albumTitle]="item.name" albumType="Song"></app-album-card>
+<ng-container *ngIf="(tracks$ | async) as trcks">
+  <ng-container *ngFor="let item of trcks.tracks">
+    <!-- <app-song *ngSwitchCase="'song'"></app-song> -->
+    <app-album-card [item]="item"></app-album-card>
+  </ng-container>
 </ng-container>

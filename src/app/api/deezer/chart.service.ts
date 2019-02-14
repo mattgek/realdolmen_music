@@ -22,7 +22,9 @@ export class ChartService implements IChartService {
               type: 'album',
               id: album.id,
               img: album.cover_medium,
-              name: album.title
+              title: album.title,
+              tracklist: album.tracklist,
+              artist: album.artist.name
             });
           });
           chart.artists.data.forEach(artist => {
@@ -30,7 +32,9 @@ export class ChartService implements IChartService {
               type: 'artist',
               id: artist.id,
               img: artist.picture_medium,
-              name: artist.name
+              name: artist.name,
+              tracklist: artist.tracklist,
+              totalFollowers: artist.nb_fan
             });
           });
           chart.playlists.data.forEach(playlist => {
@@ -38,7 +42,9 @@ export class ChartService implements IChartService {
               type: 'playlist',
               id: playlist.id,
               img: playlist.picture_medium,
-              name: playlist.title
+              title: playlist.title,
+              tracklist: playlist.tracklist,
+              totalTracks: playlist.nb_tracks
             });
           });
           chart.tracks.data.forEach(track => {
@@ -46,7 +52,9 @@ export class ChartService implements IChartService {
               type: 'song',
               id: track.id,
               img: track.album.cover_medium,
-              name: track.title
+              title: track.title,
+              tracklist: track.preview,
+              artist: track.artist.name
             });
           });
           return result;

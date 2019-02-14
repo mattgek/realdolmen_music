@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IChart } from 'src/app/api';
 
 @Component({
   selector: 'app-album-card',
@@ -6,14 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./album-card.component.scss']
 })
 export class AlbumCardComponent {
-  ddef = 'askfjds';
   // decorators
-  @Input()
-  albumCoverUrl: string;
-  @Input()
-  albumTitle: string;
-  @Input()
-  albumType: string;
-  @Input()
-  additionalInfo: string;
+  @Input() item: IChart;
 }

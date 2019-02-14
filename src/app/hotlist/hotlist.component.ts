@@ -8,7 +8,7 @@ import { IPlaylist, IPlaylistService, PLAYLIST_SERVICE } from '../api';
   styleUrls: ['./hotlist.component.scss']
 })
 export class HotlistComponent implements OnInit {
-  public tracks$: Observable<IPlaylist[]>;
+  public tracks$: Observable<IPlaylist>;
 
   constructor(@Inject(PLAYLIST_SERVICE) private playlistService: IPlaylistService) {}
 
